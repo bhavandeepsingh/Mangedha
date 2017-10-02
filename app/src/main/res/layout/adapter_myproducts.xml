@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:background="@drawable/backg_products"
+    android:elevation="0dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="3dp">
+
+    <LinearLayout
+        android:id="@+id/columnview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="300px">
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:padding="0dp"
+                android:scaleType="centerCrop"
+                android:id="@+id/list_product_image"/>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:adjustViewBounds="true"
+                android:src="@mipmap/ic_star_disable"
+                android:id="@+id/product_list_favorite"
+                android:layout_alignParentRight="true"
+                android:layout_margin="6dp"
+                android:layout_alignParentTop="true"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/list_product_name"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim_textsize" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/backg_product_type"
+                    android:paddingBottom="1dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingTop="1dp"
+                    android:id="@+id/list_product_category"
+                    android:textAllCaps="true"
+                    android:textColor="@color/clr_white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:id="@+id/list_product_price"
+                    android:textColor="@color/clr_price"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

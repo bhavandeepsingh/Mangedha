@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.mangedha.knit.activities.AboutusActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:theme="@style/myCustomToolbarTheme" >
+
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/clr_white"
+            android:layout_gravity="center"
+            android:id="@+id/toolbartitle" />
+
+
+    </android.support.v7.widget.Toolbar>    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="vertical">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:hint="@string/name" />
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:hint="@string/email" />
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:hint="@string/subject" />
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:layout_height="100dp"
+                android:singleLine="false"
+                android:inputType="textMultiLine"
+                android:hint="@string/message" />
+
+            <TextView
+                android:id="@+id/sendbtn"
+                style="@style/attrs_register_btn"
+                android:layout_marginTop="@dimen/dim_textfields_top_margin"
+                android:onClick="click_sendbtn"
+                android:text="@string/send" />
+
+            // PHONE
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dim_side_margin"
+                    android:layout_marginTop="30dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/contactus_icon_size"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_pone" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/contactus_text_margin_left"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/phone"
+                            android:textAllCaps="true"
+                            android:textColor="@color/clr_text_dark"
+                            android:textSize="@dimen/dim_textsize"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+91-986754356"
+                            android:textColor="@color/clr_text"
+                            android:textSize="@dimen/dim_textsize"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+            </LinearLayout>
+
+            // EMAIL
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dim_side_margin"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/contactus_icon_size"
+                        android:layout_height="wrap_content"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_email" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/contactus_text_margin_left"
+                        android:orientation="vertical">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email"
+                            android:textAllCaps="true"
+                            android:textColor="@color/clr_text_dark"
+                            android:textSize="@dimen/dim_textsize"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="info@mangedhaknit.com"
+                            android:textColor="@color/clr_text"
+                            android:textSize="@dimen/dim_textsize"
+                            android:textStyle="normal" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="100dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+            </LinearLayout>
+
+
+            // ADDRESS
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dim_side_margin"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingBottom="60dp">
+
+                <ImageView
+                    android:layout_width="@dimen/contactus_icon_size"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY"
+                    android:src="@mipmap/ic_address" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/contactus_text_margin_left"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/address"
+                        android:textAllCaps="true"
+                        android:textColor="@color/clr_text_dark"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="2"
+                        android:text="MangedhaKnit, SCO-42
+New Shimlapuri, Ludhiana"
+                        android:textColor="@color/clr_text"
+                        android:textSize="@dimen/dim_textsize"
+                        android:textStyle="normal" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+</LinearLayout>

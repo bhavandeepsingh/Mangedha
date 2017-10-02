@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#f1544a</color>
+    <color name="colorPrimaryDark">#f1544a</color>
+    <color name="colorAccent">#f1544a</color>
+    <color name="colorsky">#34c3d3</color>
+
+    <color name="clr_white">#ffffff</color>
+    <color name="clr_blank">#00000000</color>
+    <color name="clr_border">#eaeaea</color>
+    <color name="clr_text">#9d9d9d</color>
+    <color name="clr_text_dark">#5e5e5e</color>
+    <color name="clr_facebook_btn">#3d5c9c</color>
+    <color name="clr_google_btn">#da4030</color>
+    <color name="clr_editprofile_fields">#f4f4f4</color>
+    <color name="clr_price">#a3a3a3</color>
+    <color name="clr_drawer_border">#38d4e6</color>
+    <color name="clr_search_backg">#f7f7f7</color>
+
+</resources>

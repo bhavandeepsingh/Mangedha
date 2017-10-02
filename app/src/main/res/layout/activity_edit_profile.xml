@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mangedha.knit.activities.MyProfile">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/app_bar" />
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:padding="30dp"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name"
+                android:textAllCaps="true"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="bold" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/profile_name"
+                android:padding="8dp"
+                android:background="@color/clr_editprofile_fields"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/clr_text"
+                android:textSize="@dimen/myprofile_textsize"
+                android:textStyle="normal" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_border_height"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="14dp"
+                android:background="@color/clr_border" />
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_email"
+                    android:padding="8dp"
+                    android:background="@color/clr_editprofile_fields"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/clr_text"
+                    android:textSize="@dimen/myprofile_textsize"
+                    android:textStyle="normal" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mobile"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_mobile"
+                    android:padding="8dp"
+                    android:background="@color/clr_editprofile_fields"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/clr_text"
+                    android:textSize="@dimen/myprofile_textsize"
+                    android:textStyle="normal" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/city"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_city"
+                    android:padding="8dp"
+                    android:background="@color/clr_editprofile_fields"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/clr_text"
+                    android:textSize="@dimen/myprofile_textsize"
+                    android:textStyle="normal" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/zipcode"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_zip_code"
+                    android:padding="8dp"
+                    android:background="@color/clr_editprofile_fields"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/clr_text"
+                    android:textSize="@dimen/myprofile_textsize"
+                    android:textStyle="normal" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dim_border_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="14dp"
+                    android:background="@color/clr_border" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/state"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profile_state"
+                    android:padding="8dp"
+                    android:background="@color/clr_editprofile_fields"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/clr_text"
+                    android:textSize="@dimen/myprofile_textsize"
+                    android:textStyle="normal" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+
+            style="@style/attrs_register_btn"
+            android:id="@+id/profile_save_button"
+            android:layout_marginRight="0dp"
+            android:layout_marginLeft="0dp"
+            android:layout_marginTop="35dp"
+            android:text="@string/save" />
+
+
+
+    </LinearLayout>
+
+
+
+</ScrollView>
+
+
+
+
+
+
+</LinearLayout>

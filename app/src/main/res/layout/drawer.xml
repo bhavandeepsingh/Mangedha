@@ -1,0 +1,329 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/clr_white"
+    android:orientation="horizontal">
+<android.support.v4.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/drawerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/header" />
+
+
+        <LinearLayout
+            android:id="@+id/productslayer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_products" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/products"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/membershiplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_membership" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/membershipplans"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/myprofilelayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_myprofile" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/myprofile"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/favouriteproductlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_favouriteprod" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/favouritrproduct"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/myproductlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_myproduct" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/myproducts"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/changepass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_changepass" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/changepass"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/aboutuslayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_about" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/about"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/contctuslayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_contactus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/contactus"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim_border_height"
+            android:background="@color/clr_drawer_border" />
+
+        <LinearLayout
+            android:id="@+id/logoutlayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_logout" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="@string/logiut"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>
+
+</RelativeLayout>

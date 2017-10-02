@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/clr_white"
+    android:orientation="vertical"
+    tools:context="com.mangedha.knit.activities.RegisterActiviy">
+
+    <ImageView
+        android:id="@+id/backarroww"
+        android:layout_width="40dp"
+        android:padding="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        style="@style/attrs_backarrow"/>
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:scrollbars="none"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dim_side_margin"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/attrs_register_title"
+            android:text="@string/register" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_name"
+            android:hint="@string/namehint" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_email"
+            android:hint="@string/emailhint" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_mobile"
+            android:hint="@string/mobilehint" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_city"
+            android:hint="@string/cityhhint" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_zip_code"
+            android:hint="@string/zipcodehint" />
+
+        <EditText
+            style="@style/attrs_register_field"
+            android:id="@+id/register_state"
+            android:hint="@string/statehint" />
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:errorEnabled="false"
+            app:hintAnimationEnabled="true"
+            app:hintEnabled="false"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            app:passwordToggleEnabled="true">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:hint="@string/password"
+                android:id="@+id/register_password"
+                android:inputType="textPassword" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <TextView
+            android:id="@+id/register_button"
+            style="@style/attrs_register_btn"/>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_border_height"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="13dp"
+                android:layout_marginLeft="@dimen/dim_side_margin"
+                android:layout_toLeftOf="@+id/ortext"
+                android:background="@color/clr_border" />
+            <TextView
+                android:id="@+id/ortext"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/backg_or"
+                android:gravity="center"
+                android:padding="0dp"
+                android:text="or"
+                android:textSize="16dp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_border_height"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dim_side_margin"
+                android:layout_marginLeft="13dp"
+                android:layout_toRightOf="@+id/ortext"
+                android:background="@color/clr_border" />
+        </RelativeLayout>
+
+        <TextView
+            style="@style/attrs_register_btn"
+            android:background="@drawable/backg_facebook_btn"
+            android:text="@string/loginwithfb"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:textAllCaps="false"/>
+        <TextView
+            style="@style/attrs_register_btn"
+            android:background="@drawable/backg_google_btn"
+            android:text="@string/loginwithgoogle"
+            android:layout_marginTop="@dimen/dim_textfields_top_margin"
+            android:layout_marginBottom="35dp"
+            android:textAllCaps="false"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="0dp"
+            android:background="@color/clr_white">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dim_border_height"
+                android:background="@color/clr_border" />
+
+            <RelativeLayout
+                android:id="@+id/alreadyregispart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/alredyhave_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/alreadyhave"
+                    android:textSize="@dimen/dim_textsize" />
+
+            </RelativeLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+    </LinearLayout>
+        </ScrollView>
+
+
+
+
+</LinearLayout>

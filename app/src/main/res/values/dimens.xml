@@ -1,0 +1,32 @@
+<resources>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    // COMMON
+    <dimen name="dim_backaroow_size">24dp</dimen>
+    <dimen name="dim_border_height">1dp</dimen>
+    <dimen name="dim_layout_padding">20dp</dimen>
+    <dimen name="dim_recycler_padding">6dp</dimen>
+
+    // LOGIN &amp; REGISTER
+    <dimen name="dim_side_margin">30dp</dimen>
+    <dimen name="dim_textsize">15sp</dimen>
+    <dimen name="dim_textfields_top_margin">15dp</dimen>
+
+    // CONTACT US
+    <dimen name="contactus_icon_size">56dp</dimen>
+    <dimen name="contactus_text_margin_left">15dp</dimen>
+
+    // MY PROFILE
+    <dimen name="myprofile_textsize">18sp</dimen>
+
+    // MEMBERSHIP
+    <dimen name="membership_sidemargin">12dp</dimen>
+
+    // PRODUCTS and DRAWER
+    <dimen name="drawer_icons_size">36dp</dimen>
+    <dimen name="drawer_icons_margin">6dp</dimen>
+    <dimen name="drawer_text_paddinf_left">6dp</dimen>
+
+</resources>

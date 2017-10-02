@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mangedha.knit.activities.FiltersActivity">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/toolbartitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Filters"
+            android:textColor="@color/clr_white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/backarroww"
+            android:layout_width="40dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="8dp"
+            android:onClick="click_backarrow"
+            android:padding="8dp"
+            android:src="@mipmap/ic_cross" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginRight="25dp"
+        android:paddingBottom="30dp"
+        android:orientation="vertical"
+        android:paddingLeft="25dp">
+
+        <LinearLayout
+            android:id="@+id/filterpart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:text="Categories"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:id="@+id/columnview"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="13dp"
+                android:layout_marginTop="13dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="-5dp"
+                android:orientation="horizontal">
+
+                <com.mangedha.knit.helpers.SmoothCheckBox
+                    android:id="@+id/category_select_all"
+                    android:layout_width="22dp"
+                    android:layout_height="22dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_margin="0dp"
+                    android:paddingTop="0dp"
+                    app:color_checked="@color/colorAccent"
+                    app:color_unchecked_stroke="@color/clr_border"
+                    app:stroke_width="0.5dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+
+                    android:layout_marginLeft="10dp"
+                    android:text="SELECT ALL"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/dim_textsize"
+                    android:textStyle="bold" />
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/category_filter_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/apply_category_filter"
+            android:layout_below="@+id/filterpart"
+            android:layout_marginTop="10dp"
+            android:paddingRight="@dimen/dim_recycler_padding" />
+
+
+        <TextView
+            android:id="@+id/apply_category_filter"
+            style="@style/attrs_register_btn"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="10dp"
+            android:text="Apply filters" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

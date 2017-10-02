@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="SmoothCheckBox">
+        <attr name="duration" format="integer"/>
+        <attr name="stroke_width" format="dimension"/>
+        <attr name="color_tick" format="color"/>
+        <attr name="color_checked" format="color"/>
+        <attr name="color_unchecked" format="color"/>
+        <attr name="color_unchecked_stroke" format="color"/>
+    </declare-styleable>
+
+
+    // BACK ARRROW
+    <style name="attrs_backarrow">
+        <item name="android:layout_width">@dimen/dim_backaroow_size</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">18dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:adjustViewBounds">true</item>
+        <item name="android:src">@mipmap/ic_backarrow</item>
+    </style>
+
+    // LOGIN &amp; REGISTER
+    <style name="attrs_register_title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">35sp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="attrs_register_field">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/dim_side_margin</item>
+        <item name="android:layout_marginRight">@dimen/dim_side_margin</item>
+        <item name="android:layout_marginTop">@dimen/dim_textfields_top_margin</item>
+        <item name="android:padding">11dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:textSize">@dimen/dim_textsize</item>
+        <item name="android:textColor">@color/clr_text</item>
+        <item name="android:background">@drawable/backg_register_fields</item>
+        <item name="android:gravity">left</item>
+    </style>
+
+    <style name="attrs_register_checkbox">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:layout_marginLeft">4dp</item>
+        <item name="android:layout_marginRight">@dimen/dim_side_margin</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:checked">false</item>
+        <item name="android:scaleX">1.2</item>
+        <item name="android:scaleY">1.2</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:text">@string/rememberme</item>
+        <item name="android:textColor">@color/clr_text</item>
+        <item name="android:theme">@style/MyCheckBox</item>
+    </style>
+
+    <style name="attrs_register_btn">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:background">@drawable/backg_register_btn</item>
+        <item name="android:layout_marginLeft">@dimen/dim_side_margin</item>
+        <item name="android:layout_marginRight">@dimen/dim_side_margin</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:text">Register</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textColor">@color/clr_white</item>
+        <item name="android:layout_marginTop">25dp</item>
+
+    </style>
+
+
+</resources>

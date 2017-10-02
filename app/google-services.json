@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "125493381394",
+    "firebase_url": "https://mangedha.firebaseio.com",
+    "project_id": "mangedha",
+    "storage_bucket": "mangedha.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125493381394:android:b3b5e8cae96528d3",
+        "android_client_info": {
+          "package_name": "com.mangedha.knit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125493381394-71pbor5k9c1465q424mjuq0qhb5kphf1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mangedha.knit",
+            "certificate_hash": "6c0574c249b26e1cfd21a561bc27c9ae73f1a4e6"
+          }
+        },
+        {
+          "client_id": "125493381394-gro1m0vn6tbh2ikq8qooq3qsi7vs9k02.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJn8lBATQ61LHySR8oZ5p0m3QlgoteBUo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125493381394-gro1m0vn6tbh2ikq8qooq3qsi7vs9k02.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

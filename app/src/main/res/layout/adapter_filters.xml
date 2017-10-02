@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="0dp"
+
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/columnview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginBottom="13dp"
+        android:orientation="horizontal">
+
+        <com.mangedha.knit.helpers.SmoothCheckBox
+            android:id="@+id/category_check_box"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:clickable="false"
+            android:layout_margin="0dp"
+            android:layout_gravity="center_vertical"
+            android:paddingTop="0dp"
+            app:stroke_width="0.5dp"
+            app:color_checked="@color/colorAccent"
+            app:color_unchecked_stroke="@color/clr_border"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/category_name"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/clr_text"
+            android:textSize="@dimen/dim_textsize" />
+
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
