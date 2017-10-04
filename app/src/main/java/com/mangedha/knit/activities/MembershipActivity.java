@@ -29,7 +29,7 @@ public class MembershipActivity extends AppCompatActivity {
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.member_ship_recycleer_view);
         recyclerView.setHasFixedSize(true);
-        final LinearLayoutManager llm = new GridLayoutManager(this, 2);
+        final LinearLayoutManager llm = new GridLayoutManager(this, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);
         recyclerView.setNestedScrollingEnabled(false);
@@ -37,7 +37,7 @@ public class MembershipActivity extends AppCompatActivity {
         MemmberShipModel.getMembershipList(new MemmberShipModel.MemberShipInterface() {
             @Override
             public void onSuccess(MemmberShipModel memmberShipModel) {
-                MemberShipAdapter memberShipAdapter = new MemberShipAdapter(memmberShipModel);
+                MemberShipAdapter memberShipAdapter = new MemberShipAdapter(memmberShipModel, MembershipActivity.this);
                 recyclerView.setAdapter(memberShipAdapter);
             }
 

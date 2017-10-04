@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_marginBottom="6dp"
         android:layout_marginLeft="@dimen/membership_sidemargin"
         android:layout_marginRight="@dimen/membership_sidemargin"
@@ -58,12 +58,20 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:id="@+id/member_ship_description"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:id="@+id/member_ship_description"
                     android:textColor="@color/clr_white"
                     android:textSize="14sp" />
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="7dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_marginTop="7dp"
+                    android:background="@color/clr_white" />
 
             </LinearLayout>
 
@@ -72,7 +80,7 @@
 
 
         <TextView
-            android:id="@+id/buynowbtn"
+            android:id="@+id/buy_member_ship_button"
             style="@style/attrs_register_btn"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="16dp"
@@ -85,4 +93,5 @@
 
 
 
-</RelativeLayout>
+
+</LinearLayout>
