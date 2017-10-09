@@ -20,12 +20,24 @@ public class MemmberShipModel extends MangedhaModel {
     @Expose
     List<SettingModel.Membership.MemberShipDetails> memberShipDetailsList;
 
+    @SerializedName("membership")
+    @Expose
+    SettingModel.Membership membership;
+
     public List<SettingModel.Membership.MemberShipDetails> getMemberShipDetailsList() {
         return memberShipDetailsList;
     }
 
     public void setMemberShipDetailsList(List<SettingModel.Membership.MemberShipDetails> memberShipDetailsList) {
         this.memberShipDetailsList = memberShipDetailsList;
+    }
+
+    public SettingModel.Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(SettingModel.Membership membership) {
+        this.membership = membership;
     }
 
     public static void getMembershipList(final MemberShipInterface memberShipInterface){
@@ -53,4 +65,6 @@ public class MemmberShipModel extends MangedhaModel {
         void onFail(String error);
 
     }
+
+
 }

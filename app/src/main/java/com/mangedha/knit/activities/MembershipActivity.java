@@ -1,19 +1,25 @@
 package com.mangedha.knit.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.MemberShipAdapter;
+import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.http.models.MemmberShipModel;
+import com.mangedha.knit.http.models.PaymentHashModel;
+import com.mangedha.knit.http.models.SettingModel;
+import com.payumoney.core.entity.TransactionResponse;
+import com.payumoney.sdkui.ui.utils.PayUmoneyFlowManager;
 
-public class MembershipActivity extends AppCompatActivity {
+public class MembershipActivity extends MangedhaKnitActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +40,25 @@ public class MembershipActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
         recyclerView.setNestedScrollingEnabled(false);
 
+        mangedhaLoader.start();
         MemmberShipModel.getMembershipList(new MemmberShipModel.MemberShipInterface() {
             @Override
             public void onSuccess(MemmberShipModel memmberShipModel) {
-                MemberShipAdapter memberShipAdapter = new MemberShipAdapter(memmberShipModel, MembershipActivity.this);
-                recyclerView.setAdapter(memberShipAdapter);
+                mangedhaLoader.stop();
+                if(memmberShipModel.getMembership() != null){
+
+                }else {
+                    MemberShipAdapter memberShipAdapter = new MemberShipAdapter(memmberShipModel, MembershipActivity.this);
+                    recyclerView.setAdapter(memberShipAdapter);
+                }
+
             }
 
             @Override
             public void onFail(String error) {
-
+                mangedhaLoader.stop();
             }
+
         });
 
     }
@@ -59,5 +73,34 @@ public class MembershipActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("MainActivity", "request code " + requestCode + " resultcode " + resultCode);
+        if (requestCode == PayUmoneyFlowManager.REQUEST_CODE_PAYMENT && resultCode == RESULT_OK && data != null) {
+            TransactionResponse transactionResponse = data.getParcelableExtra(PayUmoneyFlowManager.INTENT_EXTRA_TRANSACTION_RESPONSE);
+            if (transactionResponse != null && transactionResponse.getPayuResponse() != null) {
+                if(transactionResponse.getTransactionStatus().equals(TransactionResponse.TransactionStatus.SUCCESSFUL)){
+                    //Success Transaction
+                    mangedhaLoader.start();
+                    PaymentHashModel.processPayment(transactionResponse, new PaymentHashModel.ProcessPayment() {
+                        @Override
+                        public void onSuccess(SettingModel settingModel) {
+                            mangedhaLoader.stop();
+                            AlertHelper.success("Membership buy successfully.", MembershipActivity.this);
+                        }
 
+                        @Override
+                        public void onFail(String error) {
+                            mangedhaLoader.stop();
+                            AlertHelper.error(error, MembershipActivity.this);
+                        }
+                    });
+                } else{
+                    //Failure Transaction
+                    Log.d("PAY_SUCCESS", transactionResponse.toString());
+                }
+            }
+        }
+    }
 }

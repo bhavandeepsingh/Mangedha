@@ -4,6 +4,7 @@ import com.mangedha.knit.http.models.CategoriesModel;
 import com.mangedha.knit.http.models.FavoriteCallModel;
 import com.mangedha.knit.http.models.MemmberShipModel;
 import com.mangedha.knit.http.models.NotificationModel;
+import com.mangedha.knit.http.models.PaymentHashModel;
 import com.mangedha.knit.http.models.ProductsModel;
 import com.mangedha.knit.http.models.SettingModel;
 import com.mangedha.knit.http.models.UserLoginModel;
@@ -81,5 +82,13 @@ public interface MangedhaWebService {
 
     @GET("member-ship/list")
     Call<MemmberShipModel> getMembership();
+
+    @FormUrlEncoded
+    @POST("payumoney/hash")
+    Call<PaymentHashModel> getPaymentHash(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("payumoney/success")
+    Call<SettingModel> paymentSuccess(@FieldMap Map<String, String> map);
 
 }

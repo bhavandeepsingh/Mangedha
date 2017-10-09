@@ -24,16 +24,9 @@ import com.mangedha.knit.MangedhaApplication;
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.Adapter_Filters;
 import com.mangedha.knit.adapters.Adapter_MyProducts;
-import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.SmoothCheckBox;
 import com.mangedha.knit.helpers.UserHelper;
-import com.mangedha.knit.http.RestAdapter;
-import com.mangedha.knit.http.models.SettingModel;
 import com.mangedha.knit.navigation.CustomNavigationView;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ProductsActivity extends MangedhaKnitActivity{
 
@@ -129,29 +122,8 @@ public class ProductsActivity extends MangedhaKnitActivity{
     void recyclerView() {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setHasFixedSize(true);
-        getSettings();
         setupProductAdapter();
     }
-
-    void getSettings(){
-        RestAdapter.get().setting().enqueue(new Callback<SettingModel>() {
-            @Override
-            public void onResponse(Call<SettingModel> call, Response<SettingModel> response) {
-                if(response.body() != null && response.body().getMembership() != null){
-                    MangedhaApplication.setMembership(response.body().getMembership());
-                }else{
-                    AlertHelper.error("Error in fetching setting please restart app.", ProductsActivity.this);
-                }
-            }
-
-            @Override
-            public void onFailure(Call<SettingModel> call, Throwable t) {
-                AlertHelper.error("Error in fetching setting please restart app.", ProductsActivity.this);
-            }
-        });
-    }
-
-
 
     void setupProductAdapter(){
 
