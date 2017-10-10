@@ -3,6 +3,9 @@ package com.mangedha.knit.http.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by bhavan on 10/2/17.
  */
@@ -140,6 +143,16 @@ public class SettingModel extends MangedhaModel {
             public void setUpdated_at(String updated_at) {
                 this.updated_at = updated_at;
             }
+
+            public long getExpiryDate(){
+                Date payment_date = new Date(Long.parseLong(getCreated_at()) * 1000);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(payment_date);
+                calendar.add(Calendar.MONTH, getValue());
+
+                return calendar.getTimeInMillis() - (new Date().getTime());
+            }
+
         }
 
         @SerializedName("payments")

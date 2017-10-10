@@ -8,11 +8,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.MemberShipAdapter;
 import com.mangedha.knit.helpers.AlertHelper;
+import com.mangedha.knit.helpers.DateHelper;
 import com.mangedha.knit.http.models.MemmberShipModel;
 import com.mangedha.knit.http.models.PaymentHashModel;
 import com.mangedha.knit.http.models.SettingModel;
@@ -20,6 +23,12 @@ import com.payumoney.core.entity.TransactionResponse;
 import com.payumoney.sdkui.ui.utils.PayUmoneyFlowManager;
 
 public class MembershipActivity extends MangedhaKnitActivity {
+
+
+    RelativeLayout my_member_ship_container;
+    RecyclerView recyclerView;
+    TextView member_ship_time_left;
+    long expiryDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +42,9 @@ public class MembershipActivity extends MangedhaKnitActivity {
         setTitle("");
         toolbartitle.setText("Membership Plans");
 
-        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.member_ship_recycleer_view);
+        my_member_ship_container = (RelativeLayout) findViewById(R.id.my_member_ship_container);
+
+        recyclerView = (RecyclerView) findViewById(R.id.member_ship_recycleer_view);
         recyclerView.setHasFixedSize(true);
         final LinearLayoutManager llm = new GridLayoutManager(this, 1);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
@@ -46,7 +57,7 @@ public class MembershipActivity extends MangedhaKnitActivity {
             public void onSuccess(MemmberShipModel memmberShipModel) {
                 mangedhaLoader.stop();
                 if(memmberShipModel.getMembership() != null){
-
+                    viewMyMerbershipPlan(memmberShipModel.getMembership());
                 }else {
                     MemberShipAdapter memberShipAdapter = new MemberShipAdapter(memmberShipModel, MembershipActivity.this);
                     recyclerView.setAdapter(memberShipAdapter);
@@ -55,8 +66,10 @@ public class MembershipActivity extends MangedhaKnitActivity {
             }
 
             @Override
-            public void onFail(String error) {
+            public void onFail(String error)
+            {
                 mangedhaLoader.stop();
+                AlertHelper.error("Please try again later.", MembershipActivity.this);
             }
 
         });
@@ -88,6 +101,7 @@ public class MembershipActivity extends MangedhaKnitActivity {
                         public void onSuccess(SettingModel settingModel) {
                             mangedhaLoader.stop();
                             AlertHelper.success("Membership buy successfully.", MembershipActivity.this);
+                            switchMembership(settingModel.getMembership());
                         }
 
                         @Override
@@ -103,4 +117,55 @@ public class MembershipActivity extends MangedhaKnitActivity {
             }
         }
     }
+
+    void switchMembership(SettingModel.Membership membership){
+        recyclerView.setAdapter(null);
+        viewMyMerbershipPlan(membership);
+    }
+
+    void viewMyMerbershipPlan(SettingModel.Membership membership){
+        my_member_ship_container.setVisibility(View.VISIBLE);
+
+        TextView my_member_ship_title = (TextView) findViewById(R.id.my_member_ship_title);
+        my_member_ship_title.setText(membership.getMemberShipDetails().getName());
+
+        TextView my_member_ship_price = (TextView) findViewById(R.id.my_member_ship_price);
+        my_member_ship_price.setText(membership.getMemberShipDetails().getPrice());
+
+        TextView my_member_ship_description = (TextView) findViewById(R.id.my_member_ship_description);
+        my_member_ship_description.setText(membership.getMemberShipDetails().getDesc());
+
+        member_ship_time_left = (TextView) findViewById(R.id.member_ship_time_left);
+        member_ship_time_left.setText(DateHelper.formatMangedha(membership.getMemberShipDetails().getExpiryDate()));
+
+        setUpThread(membership.getMemberShipDetails().getExpiryDate());
+    }
+
+    private void setUpThread(long expiryDate) {
+        this.expiryDate = expiryDate;
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                while (true){
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            MembershipActivity.this.expiryDate = (MembershipActivity.this.expiryDate - 1000);
+                            member_ship_time_left.setText(DateHelper.formatMangedha(MembershipActivity.this.expiryDate));
+                        }
+                    });
+
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+        thread.start();
+    }
+
 }

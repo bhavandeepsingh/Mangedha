@@ -79,5 +79,10 @@
 
     </style>
 
+    <style name="member_ship_time_left" parent="attrs_register_btn">
+        <item name="android:background">@color/transparent</item>
+        <item name="android:text"></item>
+    </style>
+
 
 </resources>

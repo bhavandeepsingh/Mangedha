@@ -107,4 +107,11 @@ public class DateHelper {
         if(date == null) return 0;
         return new SimpleDateFormat("yyyy-MM-dd").parse(date).getTime();
     }
+
+    public static String formatMangedha(long milliseconds){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd HH:mm:ss");
+        Date date = new Date();
+        date.setTime(milliseconds);
+        return simpleDateFormat.format(date);
+    }
 }
