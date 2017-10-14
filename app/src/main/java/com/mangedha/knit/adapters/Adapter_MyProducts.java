@@ -112,6 +112,11 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
             productsActivity.noInternetHide();
         }
 
+        if(!page_append){
+            productsModel = null;
+            notifyDataSetChanged();
+        }
+
         startLoading();
         ProductsModel.getList(new ProductsModel.ProductInterface() {
             @Override

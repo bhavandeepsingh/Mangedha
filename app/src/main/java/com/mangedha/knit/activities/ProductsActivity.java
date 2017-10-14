@@ -116,6 +116,14 @@ public class ProductsActivity extends MangedhaKnitActivity{
             }
         });
 
+        navigationView.findViewById(R.id.clear_all_category).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                adapter.allUnchecked();
+                unCheckSelectAll();
+            }
+        });
+
     }
 
 
