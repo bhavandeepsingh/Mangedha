@@ -5,18 +5,17 @@ import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.mangedha.knit.R;
 import com.mangedha.knit.activities.ImageGalleryActivity;
 import com.mangedha.knit.helpers.ImageHelper;
 import com.mangedha.knit.http.models.ProductFiles;
+import com.mangedha.knit.http.models.ProductsModel;
 
 import java.util.List;
 
@@ -29,12 +28,14 @@ public class DetailImageView extends PagerAdapter {
 
     Context context;
     List<ProductFiles> productFiles;
+    ProductsModel.Product product;
     private LayoutInflater inflater;
 
 
-    public DetailImageView(Context context, List<ProductFiles> productFiles) {
+    public DetailImageView(Context context, ProductsModel.Product product) {
         this.context = context;
-        this.productFiles = productFiles;
+        this.product = product;
+        this.productFiles = product.getProductFiles();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -56,23 +57,25 @@ public class DetailImageView extends PagerAdapter {
     public Object instantiateItem(ViewGroup container, final int position) {
         View itemView = inflater.inflate(R.layout.pager_item, container, false);
         ImageView imageView = (ImageView) itemView.findViewById(R.id.img_pager_item);
-        ImageHelper.loadImage(productFiles.get(position).getImage_path(), imageView);
-
-        imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("ASD_INDEX", String.valueOf(position));
-                Intent intent = new Intent(DetailImageView.this.context, ImageGalleryActivity.class);
-                DetailImageView.this.context.startActivity(intent);
-            }
-        });
-
+        if(product.isProductVisible()) {
+            ImageHelper.loadImage(productFiles.get(position).getImage_path(), imageView);
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(DetailImageView.this.context, ImageGalleryActivity.class);
+                    DetailImageView.this.context.startActivity(intent);
+                }
+            });
+        }else{
+            imageView.setImageResource(R.mipmap.lock_image);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+        }
         container.addView(itemView);
         return itemView;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((RelativeLayout) object);
+        container.removeView((LinearLayout) object);
     }
 }

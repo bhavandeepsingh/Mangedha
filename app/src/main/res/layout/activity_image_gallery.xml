@@ -7,29 +7,31 @@
     android:background="#000000"
 >
 
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:id="@+id/adapter_background"
         android:layout_height="wrap_content"
-        android:background="@color/clr_blank">
+        android:background="@drawable/upper_transparent">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+            android:layout_alignParentRight="true">
 
             <ImageView
                 android:id="@+id/crossimg"
-                android:layout_width="30dp"
+                android:layout_width="40dp"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:adjustViewBounds="true"
-                android:padding="8dp"
                 android:scaleType="fitXY"
-                android:src="@mipmap/ic_backarrow" />
+                android:src="@mipmap/ic_shadowarrow" />
 
             <TextView
                 android:id="@+id/gallery_view_total"
@@ -46,20 +48,13 @@
 
     </RelativeLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/pager"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/adapter_background"
-        android:background="#000000"/>
-
     <TextView
         android:id="@+id/gallery_view_news_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/lower_transparent"
         android:layout_alignParentBottom="true"
-        android:layout_margin="10dp"
-        android:lineSpacingExtra="2dp"
+        android:padding="10dp"
         android:textColor="@color/clr_white" />
 
 

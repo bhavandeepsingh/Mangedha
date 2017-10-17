@@ -259,6 +259,35 @@
             android:background="@color/clr_drawer_border" />
 
         <LinearLayout
+            android:id="@+id/notification_lyr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorsky"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_width="@dimen/drawer_icons_size"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/drawer_icons_margin"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_contactus" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:paddingLeft="@dimen/drawer_text_paddinf_left"
+                android:text="Notifications"
+                android:textAllCaps="true"
+                android:textColor="@color/clr_white"
+                android:textSize="@dimen/dim_textsize"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+        <LinearLayout
             android:id="@+id/contctuslayer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

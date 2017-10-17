@@ -4,6 +4,7 @@ import android.support.v4.util.ArrayMap;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mangedha.knit.MangedhaApplication;
 import com.mangedha.knit.http.RestAdapter;
 
 import java.util.List;
@@ -18,6 +19,11 @@ import retrofit2.Response;
  */
 
 public class ProductsModel extends MangedhaModel {
+
+
+    public static int PRODUCT_TYPE_FREE = 0;
+    public static int PRODUCT_TYPE_KNIT = 1;
+    public static int PRODUCT_TYPE_BUY = 2;
 
     @SerializedName("list")
     @Expose
@@ -76,6 +82,10 @@ public class ProductsModel extends MangedhaModel {
         @SerializedName("files")
         @Expose
         List<ProductFiles> productFiles;
+
+        @SerializedName("buyProduct")
+        @Expose
+        SettingModel.Membership buyProduct;
 
         public int getId() {
             return id;
@@ -164,6 +174,43 @@ public class ProductsModel extends MangedhaModel {
         public void setPrice(int price) {
             this.price = price;
         }
+
+        public SettingModel.Membership getBuyProduct() {
+            return buyProduct;
+        }
+
+        public void setBuyProduct(SettingModel.Membership buyProduct) {
+            this.buyProduct = buyProduct;
+        }
+
+        public boolean isProductVisible(){
+            SettingModel.Membership membership = MangedhaApplication.getMembership();
+            if(type == PRODUCT_TYPE_KNIT) {
+                if(membership != null) return membership.is_valid();
+                else return false;
+            }else if(type == PRODUCT_TYPE_BUY) {
+                if(getBuyProduct() != null) return true;
+                else return false;
+            }else {
+                return true;
+            }
+        }
+
+        public String getFirstImage(){
+            return getProductFiles().get(0).getImage_path();
+        }
+    }
+
+    @SerializedName("member_ship")
+    @Expose
+    SettingModel.Membership membership;
+
+    public SettingModel.Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(SettingModel.Membership membership) {
+        this.membership = membership;
     }
 
     public static void getList(final ProductInterface productInterface, Map<String, String> map, int page_no){

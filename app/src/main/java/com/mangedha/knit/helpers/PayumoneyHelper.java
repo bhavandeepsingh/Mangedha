@@ -94,7 +94,7 @@ public class PayumoneyHelper {
                 PayUmoneyFlowManager.startPayUMoneyFlow(
                         paymentParam,
                         mangedhaKnitActivity,
-                        R.style.AppTheme,
+                        R.style.payumoney,
                         false
                 );
             }

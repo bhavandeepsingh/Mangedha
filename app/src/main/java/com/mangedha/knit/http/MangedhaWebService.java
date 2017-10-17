@@ -1,10 +1,12 @@
 package com.mangedha.knit.http;
 
 import com.mangedha.knit.http.models.CategoriesModel;
+import com.mangedha.knit.http.models.ContactModel;
 import com.mangedha.knit.http.models.FavoriteCallModel;
 import com.mangedha.knit.http.models.MemmberShipModel;
 import com.mangedha.knit.http.models.NotificationModel;
 import com.mangedha.knit.http.models.PaymentHashModel;
+import com.mangedha.knit.http.models.ProductPaymentModel;
 import com.mangedha.knit.http.models.ProductsModel;
 import com.mangedha.knit.http.models.SettingModel;
 import com.mangedha.knit.http.models.UserLoginModel;
@@ -90,5 +92,14 @@ public interface MangedhaWebService {
     @FormUrlEncoded
     @POST("payumoney/success")
     Call<SettingModel> paymentSuccess(@FieldMap Map<String, String> map);
+
+    @FormUrlEncoded
+    @POST("payumoney/product-success")
+    Call<ProductPaymentModel> paymentProductSuccess(@FieldMap Map<String, String> map);
+
+
+    @FormUrlEncoded
+    @POST("contact/email")
+    Call<ContactModel> enquirySubmit(@FieldMap Map<String, String> map);
 
 }

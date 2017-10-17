@@ -116,8 +116,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
+                    android:textAlignment="center"
                     android:layout_marginTop="-2dp"
                     android:id="@+id/detail_price"
+                    android:visibility="gone"
                     android:textColor="@color/clr_price"
                     android:textSize="14sp"
                     android:textStyle="bold" />
@@ -141,13 +143,26 @@
     </LinearLayout>
 
 
+
+
     <TextView
-        android:id="@+id/sendbtn"
+        android:id="@+id/buy_now_button"
         style="@style/attrs_register_btn"
         android:layout_marginTop="@dimen/dim_textfields_top_margin"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:visibility="gone"
         android:text="Buy now" />
+
+    <TextView
+        android:id="@+id/member_ship_buy_details"
+        style="@style/attrs_register_title"
+        android:visibility="visible"
+        android:layout_marginTop="@dimen/dim_textfields_top_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:textSize="14dp"
+        android:textColor="@color/clr_text_dark" />
 
 
 </RelativeLayout>

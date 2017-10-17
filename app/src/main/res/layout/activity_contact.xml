@@ -43,25 +43,29 @@
 
             <EditText
                 style="@style/attrs_register_field"
+                android:id="@+id/contact_name"
                 android:hint="@string/name" />
 
             <EditText
                 style="@style/attrs_register_field"
+                android:id="@+id/contact_email"
                 android:hint="@string/email" />
 
             <EditText
                 style="@style/attrs_register_field"
+                android:id="@+id/contact_subject"
                 android:hint="@string/subject" />
 
             <EditText
                 style="@style/attrs_register_field"
+                android:id="@+id/contact_message"
                 android:layout_height="100dp"
                 android:singleLine="false"
                 android:inputType="textMultiLine"
                 android:hint="@string/message" />
 
             <TextView
-                android:id="@+id/sendbtn"
+                android:id="@+id/contact_send"
                 style="@style/attrs_register_btn"
                 android:layout_marginTop="@dimen/dim_textfields_top_margin"
                 android:onClick="click_sendbtn"

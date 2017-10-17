@@ -22,6 +22,10 @@ public class SettingModel extends MangedhaModel {
         @Expose
         int id;
 
+        @SerializedName("is_valid")
+        @Expose
+        boolean is_valid;
+
         @SerializedName("member_ship_id")
         @Expose
         int member_ship_id;
@@ -320,6 +324,14 @@ public class SettingModel extends MangedhaModel {
 
         public void setPaymentsDetals(PaymentsDetals paymentsDetals) {
             this.paymentsDetals = paymentsDetals;
+        }
+
+        public boolean is_valid() {
+            return is_valid;
+        }
+
+        public void setIs_valid(boolean is_valid) {
+            this.is_valid = is_valid;
         }
     }
 

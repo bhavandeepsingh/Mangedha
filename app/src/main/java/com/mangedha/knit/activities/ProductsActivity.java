@@ -11,9 +11,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,7 +46,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
 
     private int totalItemCount;
     private int pastVisiblesItems;
-    private boolean loadingNextPage = false;
+    public boolean loadingNextPage = false;
     private int visibleItemCount;
     int page_no = 1;
     RecyclerView recyclerView;
@@ -200,6 +202,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
         LinearLayout aboutuslayer = (LinearLayout) view.findViewById(R.id.aboutuslayer);
         LinearLayout contctuslayer = (LinearLayout) view.findViewById(R.id.contctuslayer);
         LinearLayout logoutlayer = (LinearLayout) view.findViewById(R.id.logoutlayer);
+        LinearLayout notification_lyr   = (LinearLayout) view.findViewById(R.id.notification_lyr);
 
         productslayer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -237,7 +240,9 @@ public class ProductsActivity extends MangedhaKnitActivity{
             @Override
             public void onClick(View view) {
             navigationActivity.drawerLayout.closeDrawer(navigationActivity.navView, true);
-                toolbartitle.setText("My Product");
+            toolbartitle.setText("My Product");
+            adapter_myProducts.myProduct();
+            navigationActivity.drawerLayout.closeDrawer(navigationActivity.navView, true);
             }
         });
         changepass.setOnClickListener(new View.OnClickListener() {
@@ -255,6 +260,14 @@ public class ProductsActivity extends MangedhaKnitActivity{
 
             }
         });
+        notification_lyr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, NotificationActivity.class);
+                startActivity(intent);
+            }
+        });
+
         contctuslayer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -279,6 +292,17 @@ public class ProductsActivity extends MangedhaKnitActivity{
             public void onClick(View view) {
                 page_no = 1;
                 adapter_myProducts.searchProduct(product_search_edit_text.getText().toString());
+            }
+        });
+
+        product_search_edit_text.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    page_no = 1;
+                    adapter_myProducts.searchProduct(product_search_edit_text.getText().toString());
+                }
+                return false;
             }
         });
 
@@ -364,11 +388,13 @@ public class ProductsActivity extends MangedhaKnitActivity{
         }
     }
 
-    public void afterNextPage(int records_count) {
+    public void afterNextPage(boolean is_load_more) {
         hideLoading();
-        if(records_count > 0) {
+        if(is_load_more) {
             loadingNextPage = false;
             page_no++;
+        }else{
+            loadingNextPage = true;
         }
     }
 

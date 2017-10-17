@@ -29,7 +29,7 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
 
     Map<String, String> product_request = new ArrayMap<>();
     private List<String> categoryString;
-    private int page_no = 1;
+    public boolean load_more;
 
     public Adapter_MyProducts(ProductsActivity productsActivity) {
         super();
@@ -51,14 +51,20 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
 
         viewHolder.list_product_name.setText(product.getName());
         viewHolder.list_product_category.setText(product.getCategory().getName());
-        if(product.getPrice() > 0) {
-            viewHolder.list_product_price.setText(String.valueOf(product.getPrice()));
+        if(product.getType() == ProductsModel.PRODUCT_TYPE_BUY) {
+            viewHolder.list_product_price.setText("\u20B9"  + String.valueOf(product.getPrice()));
+        }else if(product.getType() == ProductsModel.PRODUCT_TYPE_KNIT){
+            viewHolder.list_product_price.setVisibility(View.GONE);
         }else{
             viewHolder.list_product_price.setText("Free");
         }
 
         if(product.getProductFiles().size() > 0){
-            ImageHelper.loadImage(product.getProductFiles().get(0).getImage_path(), viewHolder.list_product_image);
+            if(product.isProductVisible()) {
+                ImageHelper.loadImage(product.getFirstImage(), viewHolder.list_product_image);
+            }else{
+                viewHolder.list_product_image.setImageResource(R.mipmap.lock_image);
+            }
         }
 
         if(product.getFavoriteModel() != null){
@@ -125,14 +131,15 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
                 if(page_append) {
                     ProductsModel productsModel1 = Adapter_MyProducts.this.productsModel;
                     productsModel1.getProductList().addAll(productsModel.getProductList());
-                    productsActivity.afterNextPage(productsModel.getProductList().size());
                 }else {
                     Adapter_MyProducts.this.productsModel = productsModel;
                     if (productsModel != null && productsModel.getProductList() != null && productsModel.getProductList().size() <= 0) {
                         showNoProduct();
                     }
                 }
+                MangedhaApplication.setMembership(productsModel.getMembership());
                 Adapter_MyProducts.this.notifyDataSetChanged();
+                productsActivity.afterNextPage(productsModel.getPagination().isLoad_more());
             }
 
             @Override
@@ -143,13 +150,21 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
     }
 
 
+    public void myProduct(){
+        product_request.remove("ProductsSearch[favorite]");
+        product_request.put("ProductsSearch[my_product]", "1");
+        fetchProduct(getCategoryFilters(), false);
+    }
+
     public void favoriteList(){
+        product_request.remove("ProductsSearch[my_product]");
         product_request.put("ProductsSearch[favorite]", "1");
         fetchProduct(getCategoryFilters(), false);
     }
 
     public void allList(){
         product_request.remove("ProductsSearch[favorite]");
+        product_request.remove("ProductsSearch[my_product]");
         fetchProduct(getCategoryFilters(), false);
     }
 
@@ -181,6 +196,11 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
         if(product_request.get("ProductsSearch[name]") != null){
             stringStringMap.put("ProductsSearch[name]", product_request.get("ProductsSearch[name]"));
         }
+
+        if(product_request.get("ProductsSearch[my_product]") != null){
+            stringStringMap.put("ProductsSearch[my_product]", product_request.get("ProductsSearch[my_product]"));
+        }
+
         return stringStringMap;
     }
 

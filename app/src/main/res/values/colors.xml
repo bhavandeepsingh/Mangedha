@@ -16,5 +16,6 @@
     <color name="clr_price">#a3a3a3</color>
     <color name="clr_drawer_border">#38d4e6</color>
     <color name="clr_search_backg">#f7f7f7</color>
-
+    <color name="error">#e74040</color>
+    <color name="success">#3bbe01</color>
 </resources>
