@@ -2,6 +2,7 @@ package com.mangedha.knit.http.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mangedha.knit.helpers.DateHelper;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -148,13 +149,12 @@ public class SettingModel extends MangedhaModel {
                 this.updated_at = updated_at;
             }
 
-            public long getExpiryDate(){
+            public String getExpiryDate(){
                 Date payment_date = new Date(Long.parseLong(getCreated_at()) * 1000);
                 Calendar calendar = Calendar.getInstance();
                 calendar.setTime(payment_date);
                 calendar.add(Calendar.MONTH, getValue());
-
-                return calendar.getTimeInMillis() - (new Date().getTime());
+                return DateHelper.formatMangedha(calendar.getTime().getTime());
             }
 
         }

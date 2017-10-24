@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -17,7 +16,7 @@ import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.http_interface.ChangePasswordModel;
 
-public class ChangePasswordActivity extends AppCompatActivity implements View.OnClickListener {
+public class ChangePasswordActivity extends MangedhaKnitActivity implements View.OnClickListener {
 
     Context context = ChangePasswordActivity.this;
 

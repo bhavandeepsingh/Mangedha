@@ -1,6 +1,7 @@
 package com.mangedha.knit.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -20,6 +21,7 @@ import android.widget.TextView;
 import com.mangedha.knit.R;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
+import com.mangedha.knit.helpers.UserHelper;
 import com.mangedha.knit.http.models.UserLoginModel;
 import com.mangedha.knit.http.models.http_request.RegisterUser;
 
@@ -107,48 +109,56 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
         String mobile_pattern = "[0-9]{10}";
         String email_pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        String name_text = register_name.getText().toString();
-        String email_text = register_email.getText().toString();
-        String mobile_text = register_mobile.getText().toString();
-        String city_text = register_city.getText().toString();
-        String state_text = register_state.getText().toString();
-        String zip_code_text = register_zip_code.getText().toString();
-        String password_text = register_password.getText().toString();
+        String name_text = register_name.getText().toString().trim();
+        String email_text = register_email.getText().toString().trim();
+        String mobile_text = register_mobile.getText().toString().trim();
+        String city_text = register_city.getText().toString().trim();
+        String state_text = register_state.getText().toString().trim();
+        String zip_code_text = register_zip_code.getText().toString().trim();
+        String password_text = register_password.getText().toString().trim();
 
-        String error_txt = "";
-        if(name_text.length() <= 0){
-            error_txt = "Name is required!\n";
+        boolean submit = true;
+        if(name_text.equals("")){
+            register_name.setError("Name is required!");
+            submit = false;
         }
 
-        if(email_text.length() <= 0){
-            error_txt  += "Email is required!\n";
+        if(email_text.equals("")){
+            register_email.setError("Email is required!");
+            submit = false;
         }
 
-        if((!email_text.matches(email_pattern)) && email_text.length() > 0){
-            error_txt  += "Not a valid Email!\n";
+        if((!email_text.equals("") && !email_text.matches(email_pattern))){
+            register_email.setError("Not a valid Email!");
+            submit =false;
         }
 
-        if(mobile_text.length() <= 0){
-            error_txt  += "Mobile is required!\n";
+        if(mobile_text.equals("")){
+            register_mobile.setError("Mobile is required!");
+            submit =false;
         }
 
-        if((!mobile_text.matches(mobile_pattern)) && mobile_text.length() > 0){
-            error_txt  += "Not a valid Mobile Number! \n";
+        if((!mobile_text.equals("") && !mobile_text.matches(mobile_pattern))){
+            register_mobile.setError("Not a valid Mobile Number!");
+            submit =false;
         }
 
-        if(city_text.length() <= 0){
-            error_txt  += "City is required!\n";
+        if(city_text.equals("")){
+            register_city.setError("City is required!");
+            submit =false;
         }
 
-        if(state_text.length() <= 0){
-            error_txt  += "State is required!\n";
+        if(state_text.equals("")){
+            register_state.setError("State is required!");
+            submit =false;
         }
 
-        if(password_text.length() <= 0){
-            error_txt  += "Password is required!\n";
+        if(password_text.equals("")){
+            register_password.setError("Password is required!");
+            submit =false;
         }
-        if(error_txt.length() > 0){
-            AlertHelper.error(error_txt, this);
+
+        if(!submit){
             return;
         }
 
@@ -158,7 +168,19 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
             @Override
             public void onSuccess(UserLoginModel userLoginModel) {
                 mangedhaLoader.stop();
+                UserHelper.login(userLoginModel);
                 AlertHelper.success("Register Succesfully", RegisterActiviy.this);
+                new android.os.Handler().postDelayed(
+                        new Runnable() {
+                            public void run() {
+                                Intent intent = new Intent(RegisterActiviy.this,
+                                        ProductsActivity.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+                            }
+                        },
+                        300);
             }
 
             @Override

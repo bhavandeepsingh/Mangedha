@@ -109,7 +109,7 @@ public class DateHelper {
     }
 
     public static String formatMangedha(long milliseconds){
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd, yyyy");
         Date date = new Date();
         date.setTime(milliseconds);
         return simpleDateFormat.format(date);

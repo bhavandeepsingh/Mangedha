@@ -15,7 +15,6 @@ import android.widget.TextView;
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.MemberShipAdapter;
 import com.mangedha.knit.helpers.AlertHelper;
-import com.mangedha.knit.helpers.DateHelper;
 import com.mangedha.knit.http.models.MemmberShipModel;
 import com.mangedha.knit.http.models.PaymentHashModel;
 import com.mangedha.knit.http.models.SettingModel;
@@ -136,36 +135,8 @@ public class MembershipActivity extends MangedhaKnitActivity {
         my_member_ship_description.setText(membership.getMemberShipDetails().getDesc());
 
         member_ship_time_left = (TextView) findViewById(R.id.member_ship_time_left);
-        member_ship_time_left.setText(DateHelper.formatMangedha(membership.getMemberShipDetails().getExpiryDate()));
-
-        setUpThread(membership.getMemberShipDetails().getExpiryDate());
+        member_ship_time_left.setText("Expiry on " + membership.getMemberShipDetails().getExpiryDate());
     }
 
-    private void setUpThread(long expiryDate) {
-        this.expiryDate = expiryDate;
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-
-                while (true){
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            MembershipActivity.this.expiryDate = (MembershipActivity.this.expiryDate - 1000);
-                            member_ship_time_left.setText(DateHelper.formatMangedha(MembershipActivity.this.expiryDate));
-                        }
-                    });
-
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        });
-        thread.start();
-    }
 
 }

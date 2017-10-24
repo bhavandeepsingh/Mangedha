@@ -24,8 +24,8 @@ public class RestAdapter {
 
     //private static String ROOT = "http://192.168.0.102/mangedha/api/web/v1/";
     //private static String ROOT = "http://192.168.1.5/mangedha/api/web/v1/";
-    //private static String ROOT = "http://uniquecoders.in/mangedha/api/web/v1/";
-    private static String ROOT = "http://192.168.43.236/mangedha/api/web/v1/";
+    private static String ROOT = "http://uniquecoders.in/mangedha/api/web/v1/";
+    //private static String ROOT = "http://192.168.43.236/mangedha/api/web/v1/";
 
     static {
         setupRestClient();

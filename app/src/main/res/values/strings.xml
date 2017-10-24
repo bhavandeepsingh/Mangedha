@@ -8,7 +8,7 @@
     <string name="emailhint">Email*</string>
     <string name="mobilehint">Mobile Number*</string>
     <string name="cityhhint">City*</string>
-    <string name="zipcodehint">Zipcode*</string>
+    <string name="zipcodehint">Zipcode</string>
     <string name="statehint">State*</string>
     <string name="rememberme">Remember me</string>
     <string name="loginwithfb">Login with facebook</string>

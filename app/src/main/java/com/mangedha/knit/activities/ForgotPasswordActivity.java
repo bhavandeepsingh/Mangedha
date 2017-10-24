@@ -60,9 +60,9 @@ public class ForgotPasswordActivity extends MangedhaKnitActivity implements View
     }
 
     void passwordResnd(){
-        String email = forgot_password_email.getText().toString();
-        if(email.length() <= 0){
-            AlertHelper.error("Email Required!", this);
+        String email = forgot_password_email.getText().toString().trim();
+        if(email.equals("")){
+            forgot_password_email.setError("Email is Required!");
             return;
         }
 

@@ -21,12 +21,14 @@ import com.mangedha.knit.R;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.UserLoginModel;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 public class LoginActivity extends MangedhaKnitActivity implements View.OnClickListener {
 
     TextView newuser_text, forgot_password, login_button;
     Context context = LoginActivity.this;
     EditText user_email, user_password;
+    TextInputLayout user_email_layout, user_password_layout;
     MangedhaLoader mangedhaLoader;
     TextView google_login_button;
 
@@ -48,6 +50,8 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
 
         user_email = (EditText) findViewById(R.id.user_email);
         user_password = (EditText) findViewById(R.id.user_password);
+        user_email_layout = (TextInputLayout) findViewById(R.id.user_email_layout);
+        user_password_layout = (TextInputLayout) findViewById(R.id.user_password_layout);
 
         mangedhaLoader = MangedhaLoader.init(this);
         google_login_button = (TextView) findViewById(R.id.google_login_button);
@@ -97,17 +101,24 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
 
     void loginFormSubmit(){
 
-        String email = user_email.getText().toString();
-        String password = user_password.getText().toString();
-        String error_txt = "";
-        if(email.length() <= 0){
-            error_txt = "Email Required! \n";
+        String email = user_email.getText().toString().trim();
+        String password = user_password.getText().toString().trim();
+        boolean submit = true;
+        if(email.equals("")){
+            user_email_layout .setError("Email is required!");
+            submit = false;
+        }else {
+            user_email_layout.setError(null);
         }
-        if(password.length() <= 0){
-            error_txt  += "Password Required!\n";
+
+        if(password.equals("")){
+            user_password_layout.setError("Password Required!");
+            submit = false;
+        }else {
+            user_password_layout.setError(null);
         }
-        if(error_txt.length() > 0){
-            AlertHelper.error(error_txt, this);
+
+        if(!submit){
             return;
         }
 
