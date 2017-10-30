@@ -63,6 +63,7 @@ public class DetailImageView extends PagerAdapter {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(DetailImageView.this.context, ImageGalleryActivity.class);
+                    intent.putExtra("slide_index", position);
                     DetailImageView.this.context.startActivity(intent);
                 }
             });

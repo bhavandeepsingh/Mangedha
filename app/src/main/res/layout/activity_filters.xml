@@ -118,10 +118,20 @@
             android:id="@+id/category_filter_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/apply_category_filter"
+            android:layout_above="@+id/type_filter_recycler_view"
             android:layout_below="@+id/filterpart"
             android:layout_marginTop="10dp"
             android:paddingRight="@dimen/dim_recycler_padding" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/type_filter_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_above="@+id/apply_category_filter"
+            android:layout_marginTop="10dp"
+            android:paddingRight="@dimen/dim_recycler_padding" />
+
 
 
         <TextView

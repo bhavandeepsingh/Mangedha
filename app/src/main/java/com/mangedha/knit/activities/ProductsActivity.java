@@ -26,6 +26,9 @@ import com.mangedha.knit.MangedhaApplication;
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.Adapter_Filters;
 import com.mangedha.knit.adapters.Adapter_MyProducts;
+import com.mangedha.knit.adapters.Adapter_Type_Filter;
+import com.mangedha.knit.backround_service.NotificationService;
+import com.mangedha.knit.helpers.BadgeUtils;
 import com.mangedha.knit.helpers.SmoothCheckBox;
 import com.mangedha.knit.helpers.UserHelper;
 import com.mangedha.knit.navigation.CustomNavigationView;
@@ -43,6 +46,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
     EditText product_search_edit_text;
     ImageView product_search_button;
     NavigationView navigationView;
+    Adapter_Type_Filter adapter_type_filter;
 
     private int totalItemCount;
     private int pastVisiblesItems;
@@ -65,6 +69,9 @@ public class ProductsActivity extends MangedhaKnitActivity{
         toolbartitle = (TextView) findViewById(R.id.toolbartitle);
         toolbartitle.setText("Products");
         init();
+
+        Intent mServiceIntent = new Intent(this, NotificationService.class);
+        startService(mServiceIntent);
     }
 
 
@@ -86,6 +93,28 @@ public class ProductsActivity extends MangedhaKnitActivity{
                 drawer.closeDrawer(GravityCompat.END);
             }
         });
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                hideKeyboard();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+
         RecyclerView recyclerView = (RecyclerView) navigationView.findViewById(R.id.category_filter_recycler_view);
         recyclerView.setHasFixedSize(true);
         final LinearLayoutManager llm = new GridLayoutManager(context, 2);
@@ -114,7 +143,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
             public void onClick(View view) {
                 drawer.closeDrawer(GravityCompat.END);
                 page_no = 1;
-                adapter_myProducts.searchCategory(adapter.getFilter_ids());
+                adapter_myProducts.searchCategory(adapter.getFilter_ids(), adapter_type_filter.getFilter_ids());
             }
         });
 
@@ -126,6 +155,19 @@ public class ProductsActivity extends MangedhaKnitActivity{
             }
         });
 
+        setupTypeAdapter();
+
+    }
+
+    private void setupTypeAdapter() {
+        RecyclerView recyclerView = (RecyclerView) navigationView.findViewById(R.id.type_filter_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        final LinearLayoutManager llm = new GridLayoutManager(context, 3);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(llm);
+        adapter_type_filter = new Adapter_Type_Filter(this);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setAdapter(adapter_type_filter);
     }
 
 
@@ -178,8 +220,36 @@ public class ProductsActivity extends MangedhaKnitActivity{
         ImageView imageView = (ImageView) findViewById(R.id.navIcon);
         navView = (CustomNavigationView) findViewById(R.id.navView);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                hideKeyboard();
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
         navView.setHeaderView(getHeader(), 0);
+
         navView.setScrollState(CustomNavigationView.MENU_ITEM_SCROLLABLE);
+        int notification_count = UserHelper.getSharedPreferences().getInt(NotificationService.LAST_NOTIFICATION_COUNT, 0);
+        if(notification_count > 0){
+            TextView notification_view = navView.findViewById(R.id.notification_alert_icon);
+            notification_view.setText(String.valueOf(notification_count));
+            notification_view.setVisibility(View.VISIBLE);
+        }
         navigationActivity = (ProductsActivity) ProductsActivity.this;
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -279,6 +349,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
             @Override
             public void onClick(View view) {
                 UserHelper.logout();
+                BadgeUtils.clearBadge(getApplicationContext());
                 Intent intent = new Intent(context, LoginActivity.class);
                 startActivity(intent);
                 finish();
@@ -287,6 +358,8 @@ public class ProductsActivity extends MangedhaKnitActivity{
 
         product_search_button = (ImageView) findViewById(R.id.product_search_button);
         product_search_edit_text = (EditText) findViewById(R.id.product_search_edit_text);
+
+
         product_search_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -386,6 +459,15 @@ public class ProductsActivity extends MangedhaKnitActivity{
                 }
             }
         }
+
+        int notification_count = UserHelper.getSharedPreferences().getInt(NotificationService.LAST_NOTIFICATION_COUNT, 0);
+        TextView notification_view = navView.findViewById(R.id.notification_alert_icon);
+        if(notification_count > 0){
+            notification_view.setText(String.valueOf(notification_count));
+            notification_view.setVisibility(View.VISIBLE);
+        }else{
+            notification_view.setVisibility(View.INVISIBLE);
+        }
     }
 
     public void afterNextPage(boolean is_load_more) {
@@ -401,4 +483,5 @@ public class ProductsActivity extends MangedhaKnitActivity{
     public int getPage_no() {
         return page_no;
     }
+
 }

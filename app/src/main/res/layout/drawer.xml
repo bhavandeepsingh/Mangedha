@@ -266,13 +266,30 @@
             android:orientation="horizontal"
             android:paddingLeft="10dp">
 
+
             <ImageView
                 android:layout_width="@dimen/drawer_icons_size"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/drawer_icons_margin"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_contactus" />
+                android:id="@+id/noti_icon"
+                android:src="@mipmap/notification_icon" />
+
+            <TextView
+                android:layout_height="18dp"
+                android:layout_width="18dp"
+                android:textColor="@color/clr_white"
+                android:text="2"
+                android:visibility="invisible"
+                android:textSize="12dp"
+                android:layout_marginTop="@dimen/dimen_4dp"
+                android:layout_marginLeft="-25dp"
+                android:textAlignment="center"
+                android:background="@drawable/notification_alert_icon"
+                android:id="@+id/notification_alert_icon"/>
+
+
 
             <TextView
                 android:layout_width="wrap_content"

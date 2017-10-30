@@ -29,6 +29,7 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
 
     Map<String, String> product_request = new ArrayMap<>();
     private List<String> categoryString;
+    private String typeString;
     public boolean load_more;
 
     public Adapter_MyProducts(ProductsActivity productsActivity) {
@@ -173,8 +174,9 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
         fetchProduct(getCategoryFilters(), false);
     }
 
-    public void searchCategory(List<String> stringList){
-        this.categoryString = stringList;        
+    public void searchCategory(List<String> stringList, String typeList){
+        this.categoryString = stringList;
+        this.typeString = typeList;
         fetchProduct(getCategoryFilters(), false);
     }
 
@@ -190,13 +192,19 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
             }
 
         }
+        if(typeString != null && typeString.length() > 0){
+            stringStringMap.put("ProductsSearch[type]", typeString);
+        }
+
         if(product_request.get("ProductsSearch[favorite]") != null){
             stringStringMap.put("ProductsSearch[favorite]", "1");
         }
         if(product_request.get("ProductsSearch[name]") != null){
             stringStringMap.put("ProductsSearch[name]", product_request.get("ProductsSearch[name]"));
         }
-
+        if(product_request.get("ProductsSearch[type]") != null){
+            stringStringMap.put("ProductsSearch[type]", product_request.get("ProductsSearch[type]"));
+        }
         if(product_request.get("ProductsSearch[my_product]") != null){
             stringStringMap.put("ProductsSearch[my_product]", product_request.get("ProductsSearch[my_product]"));
         }

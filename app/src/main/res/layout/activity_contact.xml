@@ -41,28 +41,67 @@
             android:layout_marginTop="30dp"
             android:orientation="vertical">
 
-            <EditText
-                style="@style/attrs_register_field"
-                android:id="@+id/contact_name"
-                android:hint="@string/name" />
+            <com.mangedha.knit.layouts.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                style="@style/attrs_register_field_layout"
+                android:layout_marginTop="@dimen/dim_textfields_top_margin"
+                android:id="@+id/contact_name_layout">
 
-            <EditText
-                style="@style/attrs_register_field"
-                android:id="@+id/contact_email"
-                android:hint="@string/email" />
+                <EditText
+                    style="@style/attrs_register_field"
+                    android:id="@+id/contact_name"
+                    android:hint="@string/name" />
 
-            <EditText
-                style="@style/attrs_register_field"
-                android:id="@+id/contact_subject"
-                android:hint="@string/subject" />
+            </com.mangedha.knit.layouts.TextInputLayout>
 
-            <EditText
-                style="@style/attrs_register_field"
-                android:id="@+id/contact_message"
-                android:layout_height="100dp"
-                android:singleLine="false"
-                android:inputType="textMultiLine"
-                android:hint="@string/message" />
+            <com.mangedha.knit.layouts.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                style="@style/attrs_register_field_layout"
+                android:layout_marginTop="@dimen/dim_textfields_top_margin"
+                android:id="@+id/contact_email_layout">
+
+                <EditText
+                    style="@style/attrs_register_field"
+                    android:id="@+id/contact_email"
+                    android:hint="@string/email" />
+            </com.mangedha.knit.layouts.TextInputLayout>
+
+            <com.mangedha.knit.layouts.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                style="@style/attrs_register_field_layout"
+                android:layout_marginTop="@dimen/dim_textfields_top_margin"
+                android:id="@+id/contact_subject_layout">
+
+                <EditText
+                    style="@style/attrs_register_field"
+                    android:id="@+id/contact_subject"
+                    android:hint="@string/subject" />
+
+            </com.mangedha.knit.layouts.TextInputLayout>
+
+            <com.mangedha.knit.layouts.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintEnabled="false"
+                style="@style/attrs_register_field_layout"
+                android:layout_marginTop="@dimen/dim_textfields_top_margin"
+                android:id="@+id/contact_message_layout">
+
+                <EditText
+                    style="@style/attrs_register_field"
+                    android:id="@+id/contact_message"
+                    android:layout_height="100dp"
+                    android:singleLine="false"
+                    android:inputType="textMultiLine"
+                    android:hint="@string/message" />
+
+            </com.mangedha.knit.layouts.TextInputLayout>
 
             <TextView
                 android:id="@+id/contact_send"

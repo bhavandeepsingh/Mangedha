@@ -18,19 +18,18 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.mangedha.knit.R;
-import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.UserLoginModel;
 import com.mangedha.knit.layouts.TextInputLayout;
 
 public class LoginActivity extends MangedhaKnitActivity implements View.OnClickListener {
 
-    TextView newuser_text, forgot_password, login_button;
+    TextView newuser_text, forgot_password, login_button, login_error_message;
     Context context = LoginActivity.this;
     EditText user_email, user_password;
     TextInputLayout user_email_layout, user_password_layout;
     MangedhaLoader mangedhaLoader;
-    TextView google_login_button;
+    TextView google_login_button, button_facebook_login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
         }
         setContentView(R.layout.activity_login);
         init();
+        setUpFacebookLogin();
         forgot_password = (TextView) findViewById(R.id.forgot_password);
         forgot_password.setOnClickListener(this);
 
@@ -53,9 +53,15 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
         user_email_layout = (TextInputLayout) findViewById(R.id.user_email_layout);
         user_password_layout = (TextInputLayout) findViewById(R.id.user_password_layout);
 
+        login_error_message = (TextView) findViewById(R.id.login_error_message);
+
         mangedhaLoader = MangedhaLoader.init(this);
         google_login_button = (TextView) findViewById(R.id.google_login_button);
         google_login_button.setOnClickListener(this);
+
+        button_facebook_login = (TextView) findViewById(R.id.button_facebook_login);
+        button_facebook_login.setOnClickListener(this);
+
     }
 
     void init(){
@@ -97,15 +103,26 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
         if(view.getId() == R.id.google_login_button){
             googleLogin();
         }
+
+        if(view.getId() == R.id.button_facebook_login){
+            facebookLogin();
+        }
     }
 
     void loginFormSubmit(){
+
+        login_error_message.setVisibility(View.GONE);
+
+        String email_pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
         String email = user_email.getText().toString().trim();
         String password = user_password.getText().toString().trim();
         boolean submit = true;
         if(email.equals("")){
-            user_email_layout .setError("Email is required!");
+            user_email_layout.setError("Email is required!");
+            submit = false;
+        }else if(!email.equals("") && !email.matches(email_pattern)){
+            user_email_layout.setError("Email is not valid!");
             submit = false;
         }else {
             user_email_layout.setError(null);
@@ -135,16 +152,17 @@ public class LoginActivity extends MangedhaKnitActivity implements View.OnClickL
             @Override
             public void onLoginFail(String message) {
                 mangedhaLoader.stop();
-                AlertHelper.error(message, LoginActivity.this);
+                login_error_message.setText(message);
+                login_error_message.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFail(Throwable t) {
                 mangedhaLoader.stop();
-                AlertHelper.error(t.getMessage(), LoginActivity.this);
             }
         });
     }
+
 
 
 }

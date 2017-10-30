@@ -13,10 +13,13 @@ import android.widget.TextView;
 import com.mangedha.knit.MangedhaApplication;
 import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.DetailImageView;
+import com.mangedha.knit.backround_service.NotificationService;
 import com.mangedha.knit.helpers.AlertHelper;
+import com.mangedha.knit.helpers.BadgeUtils;
 import com.mangedha.knit.helpers.PayumoneyHelper;
 import com.mangedha.knit.helpers.UserHelper;
 import com.mangedha.knit.http.models.FavoriteCallModel;
+import com.mangedha.knit.http.models.NotificationModel;
 import com.mangedha.knit.http.models.ProductPaymentModel;
 import com.mangedha.knit.http.models.ProductsModel;
 import com.payumoney.core.entity.TransactionResponse;
@@ -94,6 +97,18 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
             member_ship_buy_details.setVisibility(View.VISIBLE);
         }
 
+        if(product.getNotificationStatus() == null){
+            decreaseCount(1);
+            NotificationModel.unReadNotification(product.getId());
+        }
+
+    }
+
+    void decreaseCount(int cnt){
+        int count = NotificationService.getCount() - cnt;
+        if(count > 0) BadgeUtils.setBadge(getApplicationContext(), count);
+        else BadgeUtils.clearBadge(getApplicationContext());
+        NotificationService.updateCount(cnt);
     }
 
 

@@ -1,9 +1,10 @@
 package com.mangedha.knit.backround_service;
 
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.IBinder;
+import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 
@@ -51,8 +52,12 @@ public class NotificationService extends Service {
 
     private void alertVibrate() {
         long pattern[] = { 0, 100, 200, 300, 400 };
-        final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        vibrator.vibrate(pattern, 0);
+        final Vibrator vibrator  = ((Vibrator) getSystemService(VIBRATOR_SERVICE));
+        if (Build.VERSION.SDK_INT >= 26) {
+            vibrator.vibrate(VibrationEffect.createOneShot(150,10));
+        } else {
+            vibrator.vibrate(150);
+        }
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -74,11 +79,16 @@ public class NotificationService extends Service {
         UserHelper.getSharedPreferences().edit().putInt(LAST_NOTIFICATION_COUNT, count).commit();
     }
 
-    public String LAST_NOTIFICATION_COUNT = "LAST_NOTIFICATION_COUNT";
+    public static String LAST_NOTIFICATION_COUNT = "LAST_NOTIFICATION_COUNT";
 
     public static void updateCount(int cnt){
         NotificationService notificationService = new NotificationService();
         notificationService.setLastCount(notificationService.getLastCount() - cnt);
+    }
+
+    public static int getCount(){
+        NotificationService notificationService = new NotificationService();
+        return notificationService.getLastCount();
     }
 
 }

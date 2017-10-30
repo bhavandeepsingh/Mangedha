@@ -15,6 +15,7 @@ import com.mangedha.knit.R;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.http_request.ResetMyPassword;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 public class ForgotPasswordActivity extends MangedhaKnitActivity implements View.OnClickListener {
 
@@ -22,6 +23,7 @@ public class ForgotPasswordActivity extends MangedhaKnitActivity implements View
     ImageView backarrow;
     EditText forgot_password_email;
     TextView forgot_password_password_send_button;
+    TextInputLayout forgot_password_email_layout;
     MangedhaLoader mangedhaLoader;
 
     @Override
@@ -40,6 +42,8 @@ public class ForgotPasswordActivity extends MangedhaKnitActivity implements View
         forgot_password_email = (EditText) findViewById(R.id.forgot_password_email);
         forgot_password_password_send_button = (TextView) findViewById(R.id.forgot_password_password_send_button);
         forgot_password_password_send_button.setOnClickListener(this);
+
+        forgot_password_email_layout = (TextInputLayout) findViewById(R.id.forgot_password_email_layout);
 
         mangedhaLoader = MangedhaLoader.init(this);
     }
@@ -62,8 +66,10 @@ public class ForgotPasswordActivity extends MangedhaKnitActivity implements View
     void passwordResnd(){
         String email = forgot_password_email.getText().toString().trim();
         if(email.equals("")){
-            forgot_password_email.setError("Email is Required!");
+            forgot_password_email_layout.setError("Email is Required!");
             return;
+        }else{
+            forgot_password_email_layout.setError(null);
         }
 
         mangedhaLoader.start();

@@ -19,11 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.mangedha.knit.R;
-import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.helpers.UserHelper;
 import com.mangedha.knit.http.models.UserLoginModel;
 import com.mangedha.knit.http.models.http_request.RegisterUser;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 import java.util.Map;
 
@@ -34,8 +34,9 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
     ImageView backarroww;
 
     EditText register_name, register_email, register_mobile, register_city, register_zip_code, register_state, register_password;
-    TextView register_button;
+    TextView register_button, register_error_message;
     MangedhaLoader mangedhaLoader;
+    TextInputLayout register_name_layout, register_email_layout, register_mobile_layout, register_city_layout, register_zip_code_layout, register_state_layout, register_password_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +66,16 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
         register_password = (EditText) findViewById(R.id.register_password);
         register_button = (TextView) findViewById(R.id.register_button);
         register_button.setOnClickListener(this);
+
+        register_name_layout = (TextInputLayout) findViewById(R.id.register_name_layout);
+        register_email_layout = (TextInputLayout) findViewById(R.id.register_email_layout);
+        register_mobile_layout = (TextInputLayout) findViewById(R.id.register_mobile_layout);
+        register_city_layout = (TextInputLayout) findViewById(R.id.register_city_layout);
+        register_zip_code_layout = (TextInputLayout) findViewById(R.id.register_zip_code_layout);
+        register_state_layout = (TextInputLayout) findViewById(R.id.register_state_layout);
+        register_password_layout = (TextInputLayout) findViewById(R.id.register_password_layout);
+
+        register_error_message = (TextView) findViewById(R.id.register_error_message);
 
         mangedhaLoader = MangedhaLoader.init(this);
     }
@@ -105,6 +116,7 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
     }
 
     void register(){
+        register_error_message.setVisibility(View.GONE);
 
         String mobile_pattern = "[0-9]{10}";
         String email_pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -119,43 +131,52 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
 
         boolean submit = true;
         if(name_text.equals("")){
-            register_name.setError("Name is required!");
+            register_name_layout.setError("Name is required!");
             submit = false;
+        }else{
+            register_name_layout.setError(null);
         }
 
         if(email_text.equals("")){
-            register_email.setError("Email is required!");
+            register_email_layout.setError("Email is required!");
             submit = false;
+        }else if((!email_text.equals("") && !email_text.matches(email_pattern))){
+            register_email_layout.setError("Not a valid Email!");
+            submit =false;
+        }else{
+            register_email_layout.setError(null);
         }
 
-        if((!email_text.equals("") && !email_text.matches(email_pattern))){
-            register_email.setError("Not a valid Email!");
-            submit =false;
-        }
 
         if(mobile_text.equals("")){
-            register_mobile.setError("Mobile is required!");
+            register_mobile_layout.setError("Mobile is required!");
             submit =false;
-        }
-
-        if((!mobile_text.equals("") && !mobile_text.matches(mobile_pattern))){
-            register_mobile.setError("Not a valid Mobile Number!");
+        }else if((!mobile_text.equals("") && !mobile_text.matches(mobile_pattern))){
+            register_mobile_layout.setError("Not a valid Mobile Number!");
             submit =false;
+        }else{
+            register_mobile_layout.setError(null);
         }
 
         if(city_text.equals("")){
-            register_city.setError("City is required!");
+            register_city_layout.setError("City is required!");
             submit =false;
+        }else{
+            register_city_layout.setError(null);
         }
 
         if(state_text.equals("")){
-            register_state.setError("State is required!");
+            register_state_layout.setError("State is required!");
             submit =false;
+        }else{
+            register_state_layout.setError(null);
         }
 
         if(password_text.equals("")){
-            register_password.setError("Password is required!");
+            register_password_layout.setError("Password is required!");
             submit =false;
+        }else{
+            register_password_layout.setError(null);
         }
 
         if(!submit){
@@ -169,7 +190,6 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
             public void onSuccess(UserLoginModel userLoginModel) {
                 mangedhaLoader.stop();
                 UserHelper.login(userLoginModel);
-                AlertHelper.success("Register Succesfully", RegisterActiviy.this);
                 new android.os.Handler().postDelayed(
                         new Runnable() {
                             public void run() {
@@ -186,13 +206,13 @@ public class RegisterActiviy extends MangedhaKnitActivity implements View.OnClic
             @Override
             public void onLoginFail(String message) {
                 mangedhaLoader.stop();
-                AlertHelper.error(message, RegisterActiviy.this);
+                register_error_message.setText(message);
+                register_error_message.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onFail(Throwable t) {
                 mangedhaLoader.stop();
-                AlertHelper.error(t.getMessage(), RegisterActiviy.this);
             }
         });
     }

@@ -1,5 +1,6 @@
 package com.mangedha.knit.http;
 
+import com.mangedha.knit.http.models.AboutUsModel;
 import com.mangedha.knit.http.models.CategoriesModel;
 import com.mangedha.knit.http.models.ContactModel;
 import com.mangedha.knit.http.models.FavoriteCallModel;
@@ -79,8 +80,11 @@ public interface MangedhaWebService {
     @POST("notification/read")
     Call<NotificationModel> notificationUnRead(@FieldMap Map<String, Integer> stringStringMap);
 
-    @GET("notification/un-read-count")
+    @GET("product/notification-count")
     Call<NotificationModel> notificationUnReadCount();
+
+    @GET("setting/about-us")
+    Call<AboutUsModel> aboutUs();
 
     @GET("member-ship/list")
     Call<MemmberShipModel> getMembership();
@@ -101,5 +105,9 @@ public interface MangedhaWebService {
     @FormUrlEncoded
     @POST("contact/email")
     Call<ContactModel> enquirySubmit(@FieldMap Map<String, String> map);
+
+    @GET("product/read")
+    Call<NotificationModel> unRead(@QueryMap Map<String, Integer> integerMap);
+
 
 }

@@ -37,11 +37,7 @@ public class ImageGalleryActivity extends MangedhaKnitActivity{
     }
 
     private void setupGalleryView(ProductsModel.Product product) {
-
         setupViewPager(product);
-
-        changeTotalTextView(1, product.getProductFiles().size());
-
         ((TextView) findViewById(R.id.gallery_view_news_title)).setText(product.getName());
     }
 
@@ -65,6 +61,10 @@ public class ImageGalleryActivity extends MangedhaKnitActivity{
 
             }
         });
+
+        int index = (int) getIntent().getExtras().get("slide_index");
+        viewPager.setCurrentItem(index);
+        changeTotalTextView(index + 1, product.getProductFiles().size());
     }
 
     void changeTotalTextView(int page_no, int total_size){

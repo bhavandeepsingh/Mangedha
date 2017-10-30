@@ -38,41 +38,108 @@
             style="@style/attrs_register_title"
             android:text="@string/register" />
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_name"
-            android:hint="@string/namehint" />
+        <TextView
+            style="@style/attrs_register_title"
+            android:textSize="15dp"
+            android:visibility="gone"
+            android:id="@+id/register_error_message"
+            android:text="@string/login" />
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_email"
-            android:hint="@string/emailhint" />
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_mobile"
-            android:hint="@string/mobilehint" />
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_name_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_city"
-            android:hint="@string/cityhhint" />
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_name"
+                android:hint="@string/namehint" />
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_zip_code"
-            android:hint="@string/zipcodehint" />
+        </com.mangedha.knit.layouts.TextInputLayout>
 
-        <EditText
-            style="@style/attrs_register_field"
-            android:id="@+id/register_state"
-            android:hint="@string/statehint" />
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_email_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
 
-        <android.support.design.widget.TextInputLayout
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_email"
+                android:hint="@string/emailhint" />
+
+        </com.mangedha.knit.layouts.TextInputLayout>
+
+
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_mobile_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_mobile"
+                android:hint="@string/mobilehint" />
+
+        </com.mangedha.knit.layouts.TextInputLayout>
+
+
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_city_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_city"
+                android:hint="@string/cityhhint" />
+
+        </com.mangedha.knit.layouts.TextInputLayout>
+
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_zip_code_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_zip_code"
+                android:hint="@string/zipcodehint" />
+
+        </com.mangedha.knit.layouts.TextInputLayout>
+
+        <com.mangedha.knit.layouts.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_state_layout"
+            style="@style/attrs_register_field_layout"
+            app:hintEnabled="false">
+
+            <EditText
+                style="@style/attrs_register_field"
+                android:id="@+id/register_state"
+                android:hint="@string/statehint" />
+
+        </com.mangedha.knit.layouts.TextInputLayout>
+
+
+        <com.mangedha.knit.layouts.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="false"
+            style="@style/attrs_register_field_layout"
             app:hintAnimationEnabled="true"
+            android:id="@+id/register_password_layout"
             app:hintEnabled="false"
             android:layout_marginTop="@dimen/dim_textfields_top_margin"
             app:passwordToggleEnabled="true">
@@ -83,7 +150,7 @@
                 android:id="@+id/register_password"
                 android:inputType="textPassword" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.mangedha.knit.layouts.TextInputLayout>
 
 
         <TextView

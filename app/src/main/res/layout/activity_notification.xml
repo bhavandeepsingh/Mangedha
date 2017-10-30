@@ -26,12 +26,70 @@
 
     </android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingLeft="@dimen/dim_recycler_padding"
-        android:paddingRight="@dimen/dim_recycler_padding" />
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/dim_recycler_padding"
+            android:paddingRight="@dimen/dim_recycler_padding" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/no_records_found"
+            android:visibility="invisible"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:paddingTop="20dp"
+                android:textColor="#000000"
+                android:layout_centerInParent="true"
+                android:text="No Records Found"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:id="@+id/no_internet"
+            android:visibility="invisible"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:paddingTop="20dp"
+                android:textColor="#000000"
+                android:layout_centerInParent="true"
+                android:text="No Internet, please check your connection"/>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/loader"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:layout_alignParentBottom="true"
+            android:background="#00000000"
+            android:visibility="invisible">
+
+            <ProgressBar
+                android:id="@+id/progressBar1"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerInParent="true" />
+
+        </RelativeLayout>
+
+
+</RelativeLayout>
 
 
 

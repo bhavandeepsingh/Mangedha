@@ -87,6 +87,10 @@ public class ProductsModel extends MangedhaModel {
         @Expose
         SettingModel.Membership buyProduct;
 
+        @SerializedName("notification")
+        @Expose
+        NotificationStatus notificationStatus;
+
         public int getId() {
             return id;
         }
@@ -198,6 +202,14 @@ public class ProductsModel extends MangedhaModel {
 
         public String getFirstImage(){
             return getProductFiles().get(0).getImage_path();
+        }
+
+        public NotificationStatus getNotificationStatus() {
+            return notificationStatus;
+        }
+
+        public void setNotificationStatus(NotificationStatus notificationStatus) {
+            this.notificationStatus = notificationStatus;
         }
     }
 

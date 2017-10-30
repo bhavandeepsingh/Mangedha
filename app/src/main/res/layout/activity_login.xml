@@ -27,6 +27,13 @@
                     style="@style/attrs_register_title"
                     android:text="@string/login" />
 
+                <TextView
+                    style="@style/attrs_register_title"
+                    android:textSize="15dp"
+                    android:visibility="gone"
+                    android:id="@+id/login_error_message"
+                    android:text="@string/login" />
+
                 <com.mangedha.knit.layouts.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -41,8 +48,6 @@
                         android:hint="Email" />
 
                 </com.mangedha.knit.layouts.TextInputLayout>
-
-
 
                 <com.mangedha.knit.layouts.TextInputLayout
                     android:layout_width="match_parent"

@@ -12,6 +12,7 @@ import com.mangedha.knit.R;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.ContactModel;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 import java.util.Map;
 
@@ -19,6 +20,7 @@ public class ContactActivity extends MangedhaKnitActivity implements View.OnClic
 
     TextView toolbartitle;
     EditText contact_name, contact_email, contact_subject, contact_message;
+    TextInputLayout contact_name_layout, contact_email_layout, contact_subject_layout, contact_message_layout;
     TextView contact_send;
     MangedhaLoader mangedhaLoader;
 
@@ -42,6 +44,11 @@ public class ContactActivity extends MangedhaKnitActivity implements View.OnClic
         contact_message = (EditText) findViewById(R.id.contact_message);
 
         contact_send = (TextView) findViewById(R.id.contact_send);
+
+       contact_name_layout = (TextInputLayout) findViewById(R.id.contact_name_layout);
+       contact_email_layout = (TextInputLayout) findViewById(R.id.contact_email_layout);
+       contact_subject_layout = (TextInputLayout) findViewById(R.id.contact_subject_layout);
+       contact_message_layout = (TextInputLayout) findViewById(R.id.contact_message_layout);
 
         contact_send.setOnClickListener(this);
         mangedhaLoader = MangedhaLoader.init(this);
@@ -72,26 +79,40 @@ public class ContactActivity extends MangedhaKnitActivity implements View.OnClic
     void formSubmit(){
         String error_message = "";
 
-        if(contact_name.getText().toString().length() <= 0){
-            error_message += "Name is required. \n";
+        boolean submit = true;
+        if(contact_name.getText().toString().trim().equals("")){
+            contact_name_layout.setError("Name is required.");
+            submit = false;
+        }else {
+            contact_name_layout.setError(null);
         }
 
-        if(contact_message.getText().toString().length() <= 0){
-            error_message += "Message is required. \n";
+        if(contact_message.getText().toString().trim().equals("")){
+            contact_message_layout.setError("Message is required.");
+            submit = false;
+        }else{
+            contact_message_layout.setError(null);
         }
 
-        if(contact_subject.getText().toString().length() <= 0){
-            error_message += "Subject is required. \n";
+        if(contact_subject.getText().toString().trim().equals("")){
+            contact_subject_layout.setError("Subject is required.");
+            submit = false;
+        }else{
+            contact_subject_layout.setError(null);
         }
 
-        if(contact_email.getText().toString().length() <= 0){
-            error_message += "Email is required. \n";
+        if(contact_email.getText().toString().trim().equals("")){
+            contact_email_layout.setError("Email is required.");
+            submit = false;
+        }else{
+            contact_email_layout.setError(null);
         }
 
-        if(error_message.length() > 0){
-            AlertHelper.error(error_message, this);
+        if(!submit){
             return;
         }
+
+        hideKeyboard();
 
         mangedhaLoader.start();
 

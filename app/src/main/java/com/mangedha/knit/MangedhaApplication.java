@@ -7,7 +7,6 @@ import android.view.WindowManager;
 
 import com.mangedha.knit.activities.MangedhaKnitActivity;
 import com.mangedha.knit.helpers.UILApplication;
-import com.mangedha.knit.http.models.NotificationModel;
 import com.mangedha.knit.http.models.PaymentsModel;
 import com.mangedha.knit.http.models.ProductsModel;
 import com.mangedha.knit.http.models.ProfileModel;
@@ -26,7 +25,6 @@ public class MangedhaApplication extends UILApplication {
     static MangedhaApplication mangedhaApplication ;
 
     static List<ProfileModel> profileModels;
-    static List<NotificationModel.Notifications> notificationsList;
     static PaymentsModel paymentsModel;
     static ProductsModel.Product product;
     static int product_index;
@@ -86,19 +84,6 @@ public class MangedhaApplication extends UILApplication {
 
     public static void setProfileModels(List<ProfileModel> profileModels) {
         MangedhaApplication.profileModels = profileModels;
-    }
-
-    public static void setNotifcationList(List<NotificationModel.Notifications> notificationses) {
-        MangedhaApplication.notificationsList = notificationses;
-    }
-
-    public static List<NotificationModel.Notifications> getNotificationsList() {
-        return notificationsList;
-    }
-
-
-    public static void setNotificationsList(List<NotificationModel.Notifications> notificationsList) {
-        MangedhaApplication.notificationsList = notificationsList;
     }
 
 

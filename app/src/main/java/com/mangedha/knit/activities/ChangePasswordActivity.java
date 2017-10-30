@@ -15,6 +15,7 @@ import com.mangedha.knit.R;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.http.models.http_interface.ChangePasswordModel;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 public class ChangePasswordActivity extends MangedhaKnitActivity implements View.OnClickListener {
 
@@ -24,6 +25,7 @@ public class ChangePasswordActivity extends MangedhaKnitActivity implements View
     TextView password_change_button;
     ImageView backarroww;
     MangedhaLoader mangedhaLoader;
+    TextInputLayout old_password_layout, new_password_layout, confirm_password_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,10 @@ public class ChangePasswordActivity extends MangedhaKnitActivity implements View
         backarroww = (ImageView) findViewById(R.id.backarroww);
         backarroww.setOnClickListener(this);
 
+        old_password_layout = (TextInputLayout) findViewById(R.id.old_password_layout);
+        new_password_layout = (TextInputLayout) findViewById(R.id.new_password_layout);
+        confirm_password_layout = (TextInputLayout) findViewById(R.id.confirm_password_layout);
+
         mangedhaLoader = MangedhaLoader.init(this);
     }
 
@@ -61,27 +67,41 @@ public class ChangePasswordActivity extends MangedhaKnitActivity implements View
     }
 
     void updatePassword(){
-        final String old_password_text = old_password.getText().toString();
-        String new_password_text = new_password.getText().toString();
-        String confirm_password_text = confirm_password.getText().toString();
+        final String old_password_text = old_password.getText().toString().trim();
+        String new_password_text = new_password.getText().toString().trim();
+        String confirm_password_text = confirm_password.getText().toString().trim();
 
-        if(old_password_text.length() <= 0){
-            AlertHelper.error("Old password required!", this);
-            return;
+        boolean submit = true;
+
+        if(old_password_text.equals("")){
+            old_password_layout.setError("Old password required!");
+            submit = false;
+        }else{
+            old_password_layout.setError(null);
         }
 
-        if(new_password_text.length() <= 0){
-            AlertHelper.error("New password required!", this);
-            return;
+        if(new_password_text.equals("")){
+            new_password_layout.setError("New password required!");
+            submit = false;
+        }else{
+            new_password_layout.setError(null);
         }
 
-        if(confirm_password_text.length() <= 0){
-            AlertHelper.error("Confirm password required!", this);
-            return;
+        if(confirm_password_text.equals("")){
+            confirm_password_layout.setError("Confirm password required!");
+            submit = false;
+        }else{
+            confirm_password_layout.setError(null);
         }
 
         if(!confirm_password_text.equals(new_password_text)){
-            AlertHelper.error("New and Confirm password not matched!", this);
+            confirm_password_layout.setError("New and Confirm password not matched!");
+            submit = false;
+        }else if(!confirm_password_text.equals("")){
+            confirm_password_layout.setError(null);
+        }
+
+        if(!submit){
             return;
         }
 

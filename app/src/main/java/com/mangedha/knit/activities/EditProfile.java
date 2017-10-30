@@ -15,6 +15,7 @@ import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.helpers.UserHelper;
 import com.mangedha.knit.http.models.UserLoginModel;
 import com.mangedha.knit.http.models.http_request.RegisterUser;
+import com.mangedha.knit.layouts.TextInputLayout;
 
 import java.util.Map;
 
@@ -23,6 +24,7 @@ public class EditProfile extends MangedhaKnitActivity implements View.OnClickLis
     TextView toolbartitle;
     Context context =EditProfile.this;
     EditText profile_name, profile_mobile, profile_email, profile_city, profile_state, profile_zip_code;
+    TextInputLayout profile_name_layout, profile_mobile_layout, profile_email_layout, profile_city_layout, profile_state_layout, profile_zip_code_layout;
     TextView profile_save_button;
     MangedhaLoader mangedhaLoader;
 
@@ -34,7 +36,7 @@ public class EditProfile extends MangedhaKnitActivity implements View.OnClickLis
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        setTitle("");
         init();
 
     }
@@ -63,6 +65,13 @@ public class EditProfile extends MangedhaKnitActivity implements View.OnClickLis
 
         profile_save_button = (TextView) findViewById(R.id.profile_save_button);
         profile_save_button.setOnClickListener(this);
+
+        profile_name_layout = (TextInputLayout) findViewById(R.id.profile_name_layout);
+        profile_mobile_layout = (TextInputLayout) findViewById(R.id.profile_mobile_layout);
+        profile_email_layout = (TextInputLayout) findViewById(R.id.profile_email_layout);
+        profile_city_layout = (TextInputLayout) findViewById(R.id.profile_city_layout);
+        profile_state_layout = (TextInputLayout) findViewById(R.id.profile_state_layout);
+        profile_zip_code_layout = (TextInputLayout) findViewById(R.id.profile_zip_code_layout);
 
         mangedhaLoader = MangedhaLoader.init(this);
     }
@@ -98,48 +107,62 @@ public class EditProfile extends MangedhaKnitActivity implements View.OnClickLis
         String mobile_pattern = "[0-9]{10}";
         String email_pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 
-        String name_text = profile_name.getText().toString();
-        String email_text = profile_email.getText().toString();
-        String mobile_text = profile_mobile.getText().toString();
-        String city_text = profile_city.getText().toString();
-        String state_text = profile_state.getText().toString();
-        String zip_code_text = profile_zip_code.getText().toString();
+        String name_text = profile_name.getText().toString().trim();
+        String email_text = profile_email.getText().toString().trim();
+        String mobile_text = profile_mobile.getText().toString().trim();
+        String city_text = profile_city.getText().toString().trim();
+        String state_text = profile_state.getText().toString().trim();
+        String zip_code_text = profile_zip_code.getText().toString().trim();
 
-        if(name_text.length() <= 0){
-            AlertHelper.error("Name is required!", this);
+        boolean submit = true;
+
+        if(name_text.equals("")){
+            profile_name_layout.setError("Name is required!");
+            submit = false;
+        }else{
+            profile_name_layout.setError(null);
+        }
+
+        if(email_text.equals("")){
+            profile_email_layout.setError("Email is required!");
+            submit = false;
+        }else if(!email_text.equals("") && !email_text.matches(email_pattern)){
+            profile_email_layout.setError("Not a valid Email");
+            submit = false;
+        }else{
+            profile_email_layout.setError(null);
+        }
+
+        if(mobile_text.equals("")){
+            profile_mobile_layout.setError("Mobile is required!");
+            submit = false;
+        }else if(!mobile_text.equals("") && !mobile_text.matches(mobile_pattern)){
+            profile_mobile_layout.setError("Not a valid Mobile Number");
+            submit = false;
+        }else{
+            profile_mobile_layout.setError(null);
+        }
+
+        if(city_text.equals("")){
+            profile_city_layout.setError("City is required!");
+            submit = false;
+        }else {
+            profile_city_layout.setError(null);
+        }
+
+        if(state_text.equals("")){
+            profile_state_layout.setError("State is required!");
+            submit = false;
+        }else{
+            profile_state_layout.setError(null);
+        }
+
+        if(!submit){
             return;
         }
 
-        if(email_text.length() <= 0){
-            AlertHelper.error("Email is required!", this);
-            return;
-        }
 
-        if(!email_text.matches(email_pattern)){
-            AlertHelper.error("Not a valid Email", this);
-            return;
-        }
-
-        if(mobile_text.length() <= 0){
-            AlertHelper.error("Mobile is required!", this);
-            return;
-        }
-
-        if(!mobile_text.matches(mobile_pattern)){
-            AlertHelper.error("Not a valid Mobile Number", this);
-            return;
-        }
-
-        if(city_text.length() <= 0){
-            AlertHelper.error("City is required!", this);
-            return;
-        }
-
-        if(state_text.length() <= 0){
-            AlertHelper.error("State is required!", this);
-            return;
-        }
-
+        hideKeyboard();
 
         mangedhaLoader.start();
         Map<String, String> registerUser  = RegisterUser.call(email_text, name_text, mobile_text, city_text, state_text, zip_code_text);
