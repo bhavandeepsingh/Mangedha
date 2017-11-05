@@ -225,7 +225,7 @@
 
             // ADDRESS
 
-            <LinearLayout
+            <!--<LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/dim_side_margin"
@@ -267,7 +267,7 @@ New Shimlapuri, Ludhiana"
                         android:textSize="@dimen/dim_textsize"
                         android:textStyle="normal" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
 
         </LinearLayout>

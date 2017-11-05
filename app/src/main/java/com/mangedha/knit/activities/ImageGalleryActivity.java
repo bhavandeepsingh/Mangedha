@@ -44,7 +44,7 @@ public class ImageGalleryActivity extends MangedhaKnitActivity{
     void setupViewPager(final ProductsModel.Product product){
 
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(new ImageGalleryAdaptor(this, product.getProductFiles()));
+        viewPager.setAdapter(new ImageGalleryAdaptor(this, product.getImageFiles()));
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {

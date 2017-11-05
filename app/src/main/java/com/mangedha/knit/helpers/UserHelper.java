@@ -94,6 +94,7 @@ public class UserHelper {
     }
 
     public static void setAppUserMobile(String appUserMobile) {
+        boolean update = updateAppUser(APP_USER_MOBILE, appUserMobile);
         APP_USER_MOBILE = appUserMobile;
     }
 

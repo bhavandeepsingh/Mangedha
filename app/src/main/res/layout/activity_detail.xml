@@ -140,7 +140,17 @@
             android:textSize="@dimen/dim_textsize" />
 
 
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Download Files"
+                android:visibility="gone"
+                android:id="@+id/download_files" />
+
+
     </LinearLayout>
+
 
 
 

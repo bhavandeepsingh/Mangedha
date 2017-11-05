@@ -67,6 +67,9 @@ public class Adapter_MyProducts extends RecyclerView.Adapter<Adapter_MyProducts.
                 viewHolder.list_product_image.setImageResource(R.mipmap.lock_image);
             }
         }
+        else{
+            viewHolder.list_product_image.setImageResource(R.mipmap.notification_icon);
+        }
 
         if(product.getFavoriteModel() != null){
             viewHolder.product_list_favorite.setImageResource(R.mipmap.ic_star);

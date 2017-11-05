@@ -3,6 +3,7 @@ package com.mangedha.knit.http;
 import com.mangedha.knit.http.models.AboutUsModel;
 import com.mangedha.knit.http.models.CategoriesModel;
 import com.mangedha.knit.http.models.ContactModel;
+import com.mangedha.knit.http.models.DownloadZipModel;
 import com.mangedha.knit.http.models.FavoriteCallModel;
 import com.mangedha.knit.http.models.MemmberShipModel;
 import com.mangedha.knit.http.models.NotificationModel;
@@ -108,6 +109,9 @@ public interface MangedhaWebService {
 
     @GET("product/read")
     Call<NotificationModel> unRead(@QueryMap Map<String, Integer> integerMap);
+
+    @GET("product/zip-product")
+    Call<DownloadZipModel> downloadZip(@QueryMap Map<String, Integer> integerMap);
 
 
 }

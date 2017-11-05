@@ -1,9 +1,16 @@
 package com.mangedha.knit.activities;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -15,9 +22,11 @@ import com.mangedha.knit.R;
 import com.mangedha.knit.adapters.DetailImageView;
 import com.mangedha.knit.backround_service.NotificationService;
 import com.mangedha.knit.helpers.AlertHelper;
+import com.mangedha.knit.helpers.AlertMoblieRequired;
 import com.mangedha.knit.helpers.BadgeUtils;
 import com.mangedha.knit.helpers.PayumoneyHelper;
 import com.mangedha.knit.helpers.UserHelper;
+import com.mangedha.knit.http.models.DownloadZipModel;
 import com.mangedha.knit.http.models.FavoriteCallModel;
 import com.mangedha.knit.http.models.NotificationModel;
 import com.mangedha.knit.http.models.ProductPaymentModel;
@@ -29,7 +38,7 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
 
     Context context = DetailActivity.this;
     ImageView detail_page_back_button, detail_favorite;
-    TextView product_name, detail_category, detail_price, detail_description, member_ship_buy_details, buy_now_button;
+    TextView product_name, detail_category, detail_price, detail_description, member_ship_buy_details, buy_now_button, download_files;
     ProductsModel.Product product;
     ViewPager mImageViewPager;
 
@@ -70,6 +79,9 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
         member_ship_buy_details = (TextView) findViewById(R.id.member_ship_buy_details);
         buy_now_button = (TextView) findViewById(R.id.buy_now_button);
 
+        download_files = (TextView) findViewById(R.id.download_files);
+        download_files.setOnClickListener(this);
+
         if(product != null){
             product_name.setText(product.getName());
             detail_category.setText(product.getCategory().getName());
@@ -102,6 +114,9 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
             NotificationModel.unReadNotification(product.getId());
         }
 
+        if(product.isProductVisible()){
+            download_files.setVisibility(View.VISIBLE);
+        }
     }
 
     void decreaseCount(int cnt){
@@ -125,18 +140,31 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
         if(view.getId() == R.id.buy_now_button){
             productBuyInit();
         }
+
+        if(view.getId() == R.id.download_files){
+            downloadFiles();
+        }
     }
 
     private void productBuyInit() {
-        PayumoneyHelper payumoneyHelper = PayumoneyHelper.getInstance(this);
-        payumoneyHelper.setPhone(UserHelper.getAppUserMobile());
-        payumoneyHelper.setEmail(UserHelper.getEmail());
-        payumoneyHelper.setAmount(Double.parseDouble(String.valueOf(product.getPrice())));
-        payumoneyHelper.setProduct_info(product.getName());
-        payumoneyHelper.setPaymentType(PayumoneyHelper.PRODUCT_PAYMENT);
-        payumoneyHelper.setTypeValue(String.valueOf(product.getId()));
-        payumoneyHelper.setFirst_name("Mangedha");
-        payumoneyHelper.initiate();
+        if(!UserHelper.getAppUserMobile().equals("")) {
+            PayumoneyHelper payumoneyHelper = PayumoneyHelper.getInstance(this);
+            payumoneyHelper.setPhone(UserHelper.getAppUserMobile());
+            payumoneyHelper.setEmail(UserHelper.getEmail());
+            payumoneyHelper.setAmount(Double.parseDouble(String.valueOf(product.getPrice())));
+            payumoneyHelper.setProduct_info(product.getName());
+            payumoneyHelper.setPaymentType(PayumoneyHelper.PRODUCT_PAYMENT);
+            payumoneyHelper.setTypeValue(String.valueOf(product.getId()));
+            payumoneyHelper.setFirst_name("Mangedha");
+            payumoneyHelper.initiate();
+        }else{
+            AlertMoblieRequired.show(this, new AlertMoblieRequired.AlertMobileInterface() {
+                @Override
+                public void onMobileSuccess(String mobile) {
+                    productBuyInit();
+                }
+            });
+        }
     }
 
     @Override
@@ -210,5 +238,65 @@ public class DetailActivity extends MangedhaKnitActivity implements View.OnClick
                 AlertHelper.error(error, DetailActivity.this);
             }
         });
+    }
+
+    void downloadFiles(){
+        if(haveStoragePermission()) {
+            mangedhaLoader.start();
+            DownloadZipModel.downloadFile(product.getId(), new DownloadZipModel.DownloadZipInterface() {
+                @Override
+                public void onSuccess(DownloadZipModel downloadZipModel) {
+                    mangedhaLoader.stop();
+                    downloadFile(downloadZipModel.getPath(), product.getName() + ".zip");
+                }
+
+                @Override
+                public void onError(String error) {
+                    mangedhaLoader.stop();
+                }
+            });
+        }
+    }
+
+    void downloadFile(String url, String name){
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+        request.setTitle(name);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            request.allowScanningByMediaScanner();
+            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        }
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, name);
+
+        // get download service and enqueue file
+        DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+        manager.enqueue(request);
+    }
+
+    public  boolean haveStoragePermission() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED) {
+                Log.e("Permission error","You have permission");
+                return true;
+            } else {
+
+                Log.e("Permission error","You have asked for permission");
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                return false;
+            }
+        }
+        else { //you dont need to worry about these stuff below api level 23
+            Log.e("Permission error","You already have the permission");
+            return true;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(grantResults[0]== PackageManager.PERMISSION_GRANTED){
+            downloadFiles();
+        }
     }
 }

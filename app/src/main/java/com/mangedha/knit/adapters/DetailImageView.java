@@ -35,7 +35,7 @@ public class DetailImageView extends PagerAdapter {
     public DetailImageView(Context context, ProductsModel.Product product) {
         this.context = context;
         this.product = product;
-        this.productFiles = product.getProductFiles();
+        this.productFiles = product.getImageFiles();
         inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 

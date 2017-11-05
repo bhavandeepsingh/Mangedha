@@ -42,7 +42,7 @@ public class ProductsActivity extends MangedhaKnitActivity{
     Context context = ProductsActivity.this;
     TextView toolbartitle;
     Adapter_MyProducts adapter_myProducts;
-    public RelativeLayout loader, no_records_found, no_internet;
+    public RelativeLayout loader, no_records_found, no_internet, product_list_search_container;
     EditText product_search_edit_text;
     ImageView product_search_button;
     NavigationView navigationView;
@@ -69,6 +69,8 @@ public class ProductsActivity extends MangedhaKnitActivity{
         toolbartitle = (TextView) findViewById(R.id.toolbartitle);
         toolbartitle.setText("Products");
         init();
+        product_list_search_container = (RelativeLayout) findViewById(R.id.product_list_search_container);
+
 
         Intent mServiceIntent = new Intent(this, NotificationService.class);
         startService(mServiceIntent);

@@ -21,6 +21,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/product_list_search_container"
             android:background="@color/clr_search_backg">
 
             <RelativeLayout

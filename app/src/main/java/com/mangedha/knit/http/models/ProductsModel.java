@@ -7,6 +7,7 @@ import com.google.gson.annotations.SerializedName;
 import com.mangedha.knit.MangedhaApplication;
 import com.mangedha.knit.http.RestAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -201,7 +202,7 @@ public class ProductsModel extends MangedhaModel {
         }
 
         public String getFirstImage(){
-            return getProductFiles().get(0).getImage_path();
+            return getImageFiles().get(0).getImage_path();
         }
 
         public NotificationStatus getNotificationStatus() {
@@ -210,6 +211,17 @@ public class ProductsModel extends MangedhaModel {
 
         public void setNotificationStatus(NotificationStatus notificationStatus) {
             this.notificationStatus = notificationStatus;
+        }
+
+        public List<ProductFiles> getImageFiles(){
+            List<ProductFiles> productFiles = new ArrayList<>();
+            for(int i = 0; i < getProductFiles().size(); i++){
+                String type = getProductFiles().get(i).getType();
+                if(type.equals("png") || type.equals("jpg")) {
+                    productFiles.add(getProductFiles().get(i));
+                }
+            }
+            return productFiles;
         }
     }
 

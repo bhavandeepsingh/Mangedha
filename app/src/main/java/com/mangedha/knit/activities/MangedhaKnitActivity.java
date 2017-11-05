@@ -25,6 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.mangedha.knit.helpers.AlertEmailRequred;
 import com.mangedha.knit.helpers.AlertHelper;
 import com.mangedha.knit.helpers.MangedhaLoader;
 import com.mangedha.knit.helpers.UserHelper;
@@ -36,7 +37,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Map;
 
 import retrofit2.Call;
@@ -158,7 +158,9 @@ public class MangedhaKnitActivity extends AppCompatActivity implements GoogleApi
                 AlertHelper.error("Google Login failed. Please try again!", this);
             }
         }
-        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        if(mCallbackManager != null){
+            mCallbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     private void handleFacebookAccessToken(final LoginResult loginResult) {
@@ -167,19 +169,29 @@ public class MangedhaKnitActivity extends AppCompatActivity implements GoogleApi
         GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(),
                 new GraphRequest.GraphJSONObjectCallback() {
                     @Override
-                    public void onCompleted(JSONObject object, GraphResponse response) {
+                    public void onCompleted(JSONObject object, final GraphResponse response) {
 
-                        HashMap<String, String> hashMap = new HashMap<>();
-                        hashMap.put("registerid", loginResult.getAccessToken().getUserId());
-                        hashMap.put("access_token", loginResult.getAccessToken().getToken());
-                        try {
-                            hashMap.put("name", response.getJSONObject().getString("first_name") + " " + response.getJSONObject().getString("last_name"));
-                            hashMap.put("email", response.getJSONObject().getString("email"));
-                            Log.d("email", response.getJSONObject().getString("email"));
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                        if(response.getJSONObject().has("email")) {
+                            try {
+                                String name = response.getJSONObject().getString("first_name") + " " + response.getJSONObject().getString("last_name");
+                                String email = response.getJSONObject().getString("email");
+                                registerFacebook(email, name);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            AlertEmailRequred.show(MangedhaKnitActivity.this, new AlertEmailRequred.AlertEmailInterface() {
+                                @Override
+                                public void onEmailSuccess(String email) {
+                                    try {
+                                        String name = response.getJSONObject().getString("first_name") + " " + response.getJSONObject().getString("last_name");
+                                        registerFacebook(email, name);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            });
                         }
-
 
                     }
                 }
@@ -188,6 +200,33 @@ public class MangedhaKnitActivity extends AppCompatActivity implements GoogleApi
         parameters.putString("fields", "id,email,first_name,last_name,gender, birthday");
         request.setParameters(parameters);
         request.executeAsync();
+    }
+
+    void registerFacebook(String email, String name){
+        mangedhaLoader.start();
+        Map<String, String> registerUser  = RegisterUser.call(email, name, "", "", "", "");
+        RestAdapter.get().socialLogin(registerUser).enqueue(new Callback<UserLoginModel>() {
+            @Override
+            public void onResponse(Call<UserLoginModel> call, Response<UserLoginModel> response) {
+                UserLoginModel userLoginModel = response.body();
+                mangedhaLoader.stop();
+                if(userLoginModel.is_success()){
+                    UserHelper.login(userLoginModel);
+                    Intent intent = new Intent(MangedhaKnitActivity.this, ProductsActivity.class);
+                    startActivity(intent);
+                    finish();
+                }else{
+                    AlertHelper.error(userLoginModel.getError(), MangedhaKnitActivity.this);
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<UserLoginModel> call, Throwable t) {
+                mangedhaLoader.stop();
+                AlertHelper.error(t.getMessage(), MangedhaKnitActivity.this);
+            }
+        });
     }
 
 
